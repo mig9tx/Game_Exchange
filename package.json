@@ -1,0 +1,38 @@
+{
+  "name": "project_2",
+  "version": "1.0.0",
+  "description": "collaborative project 2",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "lint": "eslint \"**/*.js\" --quiet",
+    "fix": "eslint --fix .",
+    "test": "npm run lint && NODE_ENV=test mocha -u tdd --reporter spec --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mig9tx/Project_2.git"
+  },
+  "author": "Didi, Jason, and Miguel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mig9tx/Project_2/issues"
+  },
+  "homepage": "https://github.com/mig9tx/Project_2#readme",
+  "dependencies": {
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "mysql2": "^1.6.4",
+    "sequelize": "^4.41.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "eslint": "^5.9.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "mocha": "^5.2.0",
+    "prettier": "^1.15.3"
+  }
+}
