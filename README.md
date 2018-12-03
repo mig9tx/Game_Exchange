@@ -7,7 +7,7 @@ Orig. Deployment - December 12, 2018
 
 ### Project Proposal #1 
 Project Name: Game Exchange
-Platform to trade video game hardware and software. Works like Craigslist. 
+Platform to trade video game hardware and software. Works like Craigslist.\
 Game info from IGDB. Passport for auth. MySQL and sequelize for data.
 
 ### Project Proposal #2
