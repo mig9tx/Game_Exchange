@@ -8,9 +8,26 @@ Orig. Deployment - December 12, 2018
 ### Idea:
  Gamers have to sell their used games to GameStop or BestBuy lose on the trade in value when the retailer turns around and sells it for a profit.  Platform to trade video game software with gamers within a certain distance from your house. This application will allow gamers to sell or buy games at a fair price and take out the middle man.   
 
+
+ ### Prototype
+
+web 1920
+
+Login Page - Prototype
+
+![](https://github.com/mig9tx/Project_2/blob/feature/proposal/prototype.png)
+
+
+Home Page - Prototype
+![](https://github.com/mig9tx/Project_2/blob/feature/proposal/prototype2.png)
+
+### User Guide
+=======
+
 ### User Guide
 
 ### Built Utilizing
+
 
 APIs
 * Game info from (IDGB) Internet Game Database API. 
@@ -28,6 +45,9 @@ Technology Stack
 * jQuery 3.x - <http://code.jquery.com/jquery-3.3.1.min.js> 
 
 ### Original Contributors:
+Jason Jia \
+Miguel Trujillo  
+Didi Ramsamooj 
 
 ### Get Involved!
 If you have any recommendations, let us know!  
