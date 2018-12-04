@@ -7,10 +7,12 @@ const express = require("express"),
     user = require("./routes/user"),
     db = require("./models"),
     http = require("http"),
-    passport = require("passport"),
+    passport = require("passport");
     passportConfig = require("./config/passport"),
     home = require("./routes/home"),
     application = "./routes/application";
+
+SALT_WORK_FACTOR = 12;
 
 app.use("/public", express.static(__dirname + "/public"));
 
@@ -37,6 +39,14 @@ db.sequelize.sync().complete(function(err) {
     if (err) {
         throw err[0];
     } else {
+        //=============================================================================
+        //FOR DEVELOPMENT TESTING PURPOSES ONLY, REMOVE BEFORE DEPLOYING TO PRODUCTION
+        db.User.find({ where: { username: "admin" } }).success(function(user) {
+            if (!user) {
+                db.User.build({ username: "admin", password: "admin" }).save();
+            }
+        });
+        //=============================================================================
         http.createServer(app).listen(app.get("port"), function() {
             console.log("Express is listening on port " + app.get("port"));
         });
