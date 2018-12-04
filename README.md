@@ -18,7 +18,7 @@ Login Page
 
 
 
-![]()
+![](https://github.com/mig9tx/Project_2/blob/feature/proposal/prototype2.png)
 
 ### User Guide
 
@@ -40,6 +40,9 @@ Technology Stack
 * jQuery 3.x - <http://code.jquery.com/jquery-3.3.1.min.js> 
 
 ### Original Contributors:
+Jason Jia 
+Miguel Trujillo  
+Didi Ramsamooj 
 
 ### Get Involved!
 If you have any recommendations, let us know!  
