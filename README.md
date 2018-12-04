@@ -21,7 +21,7 @@ Home Page - Prototype
 ![](https://github.com/mig9tx/Project_2/blob/feature/proposal/prototype2.png)
 
 ### DB Schema Diagram
-![]()
+![](https://github.com/mig9tx/Project_2/blob/feature/proposal/DB%20Schema%20Diagram.png)
 
 
 ### User Guide
