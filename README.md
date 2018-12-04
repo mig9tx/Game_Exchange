@@ -12,12 +12,12 @@ Orig. Deployment - December 12, 2018
 
 web 1920
 
-Login Page
+Login Page - Prototype
 
 ![](https://github.com/mig9tx/Project_2/blob/feature/proposal/prototype.png)
 
 
-
+Home Page - Prototype
 ![](https://github.com/mig9tx/Project_2/blob/feature/proposal/prototype2.png)
 
 ### User Guide
