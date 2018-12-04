@@ -10,8 +10,8 @@ const db = require("./models");
 const PORT = process.env.PORT || 8080;
 const app = express();
 
-db.sequelize.sync().then(function () {
-    app.listen(PORT, function () {
+db.sequelize.sync().then(function() {
+    app.listen(PORT, function() {
         console.log("Server listening on: http://localhost:" + PORT);
     });
 });
