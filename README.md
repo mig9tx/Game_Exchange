@@ -20,6 +20,9 @@ Login Page - Prototype
 Home Page - Prototype
 ![](https://github.com/mig9tx/Project_2/blob/feature/proposal/prototype2.png)
 
+### DB Schema Diagram
+![]()
+
 
 ### User Guide
 
