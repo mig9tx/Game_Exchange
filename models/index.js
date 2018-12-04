@@ -1,8 +1,13 @@
 'use strict';
 
+exports.index = function(request, response) {
+  response.render("login.ejs");//html file "/autheticate" form method= "post"
+};
+
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+const lodash = require('lodash');//added from video
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
@@ -24,6 +29,11 @@ fs
     const model = sequelize['import'](path.join(__dirname, file));
     db[model.name] = model;
   });
+
+module.exports = lodash.extend({
+  sequelize: sequelize,
+  Sequelize: Sequelize
+}, db)
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {

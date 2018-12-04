@@ -1,17 +1,44 @@
 //dependencies
 //nmp packages
 
-const express = require("express");
+const express = require("express"),
+    routes = require("./routes"),
+    app = express(),
+    user = require("./routes/user"),
+    db = require("./models"),
+    http = require("http"),
+    passport = require("passport"),
+    passportConfig = require("./config/passport"),
+    home = require("./routes/home"),
+    application = "./routes/application";
 
-//Requiring our models for syncing
-const db = require("./models");
+app.use("/public", express.static(__dirname + "/public"));
+
+app.set("views", __dirname + "/views");
+
+app.set("port", process.env.PORT || 8080);
+app.use(express.urlencoded());
+app.use(express.bodyParser());
+app.use(express.cookieParser());
+app.use(express.session({ secret: "" }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(app.router);
+
+if ("development" === app.get("env")) {
+    app.use(express.errorHandler());
+}
+
+app.get("/", routes.index);
 
 //Sets up the Express App
-const PORT = process.env.PORT || 8080;
-const app = express();
 
-db.sequelize.sync().then(function() {
-    app.listen(PORT, function() {
-        console.log("Server listening on: http://localhost:" + PORT);
-    });
+db.sequelize.sync().complete(function(err) {
+    if (err) {
+        throw err[0];
+    } else {
+        http.createServer(app).listen(app.get("port"), function() {
+            console.log("Express is listening on port " + app.get("port"));
+        });
+    }
 });
