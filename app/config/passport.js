@@ -1,5 +1,5 @@
 const passport = require("passport");
-const LocalStrategy = require("passport-local").LocalStrategy;
+const LocalStrategy = require("passport-local").Strategy;
 const db = require("../models");
 
 //Serialize Sessions
@@ -21,9 +21,20 @@ passport.deserializeUser(function(user, done) {
 //For Authetication Purposes
 passport.use(
     new LocalStrategy(function(username, password, done) {
-        db.User.find({ where: { username: username } }).success(function(user) {
-            passwd = user ? user.password : "";;
-            isMatch = db.User.validPassword(password, passwd, done, user);;
+        db.User.findOne({ username: username }, function(err, user) {
+            if (err) {
+                return done(err);
+            }
+            if (!user) {
+                return done(null, false, { message: "Incorrect username." });
+            }
+            if (!user.validPassword(password)) {
+                return done(null, false, { message: "Incorrect password." });
+            }
+            return done(null, user);
         });
     })
 );
+
+//exports configured passport
+module.exports = passport;

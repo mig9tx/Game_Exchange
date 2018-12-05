@@ -1,54 +1,39 @@
 //dependencies
 //nmp packages
+const express = require("express");
+const app = express();
+const passport = require("passport");//authentication
+const session = require("express-session");//authentication
+const bodyParser = require("body-parser");
+const env = require("dotenv").load();
 
-const express = require("express"),
-    routes = require("./routes"),
-    app = express(),
-    user = require("./routes/user"),
-    db = require("./models"),
-    http = require("http"),
-    passport = require("passport");
-    passportConfig = require("./config/passport"),
-    home = require("./routes/home"),
-    application = "./routes/application";
+//For BodyParser
+app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.json());
 
-SALT_WORK_FACTOR = 12;
-
-app.use("/public", express.static(__dirname + "/public"));
-
-app.set("views", __dirname + "/views");
-
-app.set("port", process.env.PORT || 8080);
-app.use(express.urlencoded());
-app.use(express.bodyParser());
-app.use(express.cookieParser());
-app.use(express.session({ secret: "" }));
+//For Passport
+app.use(session({ secret: 'keyboard cat',resave: true, saveUninitialized:true }));
 app.use(passport.initialize());
-app.use(passport.session());
-app.use(app.router);
+app.use(passport.session()); //for Persistent login sessions
 
-if ("development" === app.get("env")) {
-    app.use(express.errorHandler());
-}
+//Models
+const models = require("./app/models");
 
-app.get("/", routes.index);
+//Sync the database by importing the the models
+models.sequelize.sync().then(function() {
+    console.log("Nice! Database looks fine")
+}).catch(function(err){
+    console.log(err, "Something went wrong with the Database Update!")
+});
 
-//Sets up the Express App
 
-db.sequelize.sync().complete(function(err) {
-    if (err) {
-        throw err[0];
-    } else {
-        //=============================================================================
-        //FOR DEVELOPMENT TESTING PURPOSES ONLY, REMOVE BEFORE DEPLOYING TO PRODUCTION
-        db.User.find({ where: { username: "admin" } }).success(function(user) {
-            if (!user) {
-                db.User.build({ username: "admin", password: "admin" }).save();
-            }
-        });
-        //=============================================================================
-        http.createServer(app).listen(app.get("port"), function() {
-            console.log("Express is listening on port " + app.get("port"));
-        });
-    }
+
+app.get("/", function(req, res) {
+    res.send("Welcome to Passport with Sequelize");
+});
+
+app.listen(8080, function(err) {
+    if (!err)
+        console.log("Site is Live"); else console.log(err);
+
 });
