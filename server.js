@@ -20,7 +20,7 @@ app.use(passport.initialize());
 app.use(passport.session()); //for Persistent login sessions
 
 //For Handlebars
-app.set("views", "./app/views");
+app.set("views", "./app/views/layouts");
 app.engine(
     "hbs",
     exphbs({
