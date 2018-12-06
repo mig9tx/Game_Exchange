@@ -32,12 +32,16 @@ app.set("view engine", ".hbs");
 //Models
 const models = require("./app/models");
 
-app.get("/", function(req, res) {
-    res.send("Welcome to Passport with Sequelize");
-});
+// app.get("/", function(req, res) {
+//     res.send("Welcome to Passport with Sequelize");
+// });
+
+// Static directory
+app.use(express.static("public"));
 
 //Routes
 require("./app/routes/auth.js")(app, passport);
+require("./app/routes/htmlRoutes.js")(app);
 
 //Passport Strategies
 require("./app/config/passport/passport.js")(passport, models.User);
