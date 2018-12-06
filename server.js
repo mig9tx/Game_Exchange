@@ -1,17 +1,60 @@
 //dependencies
 //nmp packages
-
+require("dotenv").config();
 const express = require("express");
-
-//Requiring our models for syncing
-const db = require("./models");
-
-//Sets up the Express App
-const PORT = process.env.PORT || 8080;
 const app = express();
+const passport = require("passport"); //authentication
+const session = require("express-session"); //authentication
+const bodyParser = require("body-parser");
+const exphbs = require("express-handlebars");
 
-db.sequelize.sync().then(function() {
-    app.listen(PORT, function() {
-        console.log("Server listening on: http://localhost:" + PORT);
-    });
+//For BodyParser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+//For Passport
+app.use(
+    session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+);
+app.use(passport.initialize());
+app.use(passport.session()); //for Persistent login sessions
+
+//For Handlebars
+app.set("views", "./app/views");
+app.engine(
+    "hbs",
+    exphbs({
+        extname: ".hbs"
+    })
+);
+app.set("view engine", ".hbs");
+
+//Models
+const models = require("./app/models");
+
+app.get("/", function(req, res) {
+    res.send("Welcome to Passport with Sequelize");
 });
+
+//Routes
+require("./app/routes/auth.js")(app, passport);
+
+//Passport Strategies
+require("./app/config/passport/passport.js")(passport, models.User);
+
+//Sync the database by importing the the models
+models.sequelize
+    .sync()
+    .then(function() {
+        console.log("Database is working!");
+        app.listen(8080, function(err) {
+            if (!err) {
+                console.log("Site is Live");
+            } else {
+                console.log(err);
+            }
+        });
+    })
+    .catch(function(err) {
+        console.log(err, "Something went wrong with the Database Update!");
+    });
