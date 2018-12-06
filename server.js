@@ -8,6 +8,7 @@ const session = require("express-session"); //authentication
 const bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
 const PORT = process.env.PORT || 8080;
+const path = require("path");
 
 //For BodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -21,12 +22,13 @@ app.use(passport.initialize());
 app.use(passport.session()); //for Persistent login sessions
 
 //For Handlebars
-app.set("views", "./app/views/layouts");
+app.set("views", path.join(__dirname, "/app/views"));
 app.engine(
     "hbs",
     exphbs({
         defaultLayout: "main",
-        extname: ".hbs"
+        extname: ".hbs",
+        layoutsDir: "app/views/layouts"
     })
 );
 app.set("view engine", ".hbs");
