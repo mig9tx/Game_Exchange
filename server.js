@@ -1,11 +1,11 @@
 //dependencies
 //nmp packages
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const passport = require("passport"); //authentication
 const session = require("express-session"); //authentication
 const bodyParser = require("body-parser");
-const env = require("dotenv").load();
 const exphbs = require("express-handlebars");
 
 //For BodyParser
@@ -37,22 +37,24 @@ app.get("/", function(req, res) {
 });
 
 //Routes
-let authRoute = require("./app/routes/auth.js")(app, passport);
+require("./app/routes/auth.js")(app, passport);
 
 //Passport Strategies
 require("./app/config/passport/passport.js")(passport, models.User);
 
 //Sync the database by importing the the models
-models.sequelize.sync().then(function() {
-    console.log("Database is working!");
-    app.listen(8080, function(err) {
-        if (!err) {console.log("Site is Live");}
-        else {
-            console.log(err);
-        }
-    });
-})
+models.sequelize
+    .sync()
+    .then(function() {
+        console.log("Database is working!");
+        app.listen(8080, function(err) {
+            if (!err) {
+                console.log("Site is Live");
+            } else {
+                console.log(err);
+            }
+        });
+    })
     .catch(function(err) {
         console.log(err, "Something went wrong with the Database Update!");
     });
-
