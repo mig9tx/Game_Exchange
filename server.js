@@ -7,6 +7,7 @@ const passport = require("passport"); //authentication
 const session = require("express-session"); //authentication
 const bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
+const PORT = process.env.PORT || 8080;
 
 //For BodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -46,17 +47,13 @@ require("./app/routes/htmlRoutes.js")(app);
 //Passport Strategies
 require("./app/config/passport/passport.js")(passport, models.User);
 
-//Sync the database by importing the the models
+// Syncing our sequelize models and then starting our Express app
+// =============================================================
 models.sequelize
-    .sync()
+    .sync({ force: true })
     .then(function() {
-        console.log("Database is working!");
-        app.listen(8080, function(err) {
-            if (!err) {
-                console.log("Site is Live");
-            } else {
-                console.log(err);
-            }
+        app.listen(PORT, function() {
+            console.log("App listening on PORT " + PORT);
         });
     })
     .catch(function(err) {
