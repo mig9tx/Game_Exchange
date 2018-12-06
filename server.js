@@ -25,6 +25,7 @@ app.set("views", "./app/views/layouts");
 app.engine(
     "hbs",
     exphbs({
+        defaultLayout: "main",
         extname: ".hbs"
     })
 );
