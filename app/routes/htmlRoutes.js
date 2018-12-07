@@ -26,26 +26,17 @@ module.exports = function(app) {
 
     // dashboard route
     app.get("/dashboard", isAuthenticated, function(req, res) {
-        if (req.user) {
-            res.render("dashboard");
-        }
-        res.render("signup");
+        res.render("dashboard");
     });
 
     //Edit Post route loads editpost.hbs
     app.get("/editpost", isAuthenticated, function(req, res) {
-        if (req.user) {
-            res.render("editpost");
-        }
-        res.render("signup");
+        res.render("editpost");
     });
 
     //Post Game route loads postgame.hbs
     app.get("/postgame", isAuthenticated, function(req, res) {
-        if (req.user) {
-            res.render("postgame");
-        }
-        res.render("signup");
+        res.render("postgame");
     });
 
     //Sign in route loads signin.hbs
@@ -60,9 +51,13 @@ module.exports = function(app) {
 
     //User Account loads useraccount.hbs
     app.get("/useraccount", isAuthenticated, function(req, res) {
-        if (req.user) {
-            res.render("useraccount");
-        }
-        res.render("signin");
+        res.render("useraccount");
     });
+
+    //User logs out of account
+    // app.get("/logout", function(req, res) {
+    //     req.logout();
+    //     res.redirect("/");
+    //     console.log("You're logged out");
+    // });
 };
