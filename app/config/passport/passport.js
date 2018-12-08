@@ -4,21 +4,6 @@ module.exports = function(passport, user) {
     let User = user;
     let LocalStrategy = require("passport-local").Strategy;
 
-    //Serialize user
-    passport.serializeUser(function(user, done) {
-        done(null, user.id);
-    });
-
-    //deserialize User
-    passport.deserializeUser(function(id, done) {
-        User.findById(id).then(function(user) {
-            if (user) {
-                done(null, user.get());
-            } else {
-                done(user.errors, null);
-            }
-        });
-    });
     passport.use(
         "local-signup",
         new LocalStrategy(
@@ -105,4 +90,19 @@ module.exports = function(passport, user) {
             }
         )
     );
+    //Serialize user
+    passport.serializeUser(function(user, done) {
+        done(null, user.id);
+    });
+
+    //deserialize User
+    passport.deserializeUser(function(id, done) {
+        User.findById(id).then(function(user) {
+            if (user) {
+                done(null, user.get());
+            } else {
+                done(user.errors, null);
+            }
+        });
+    });
 };
