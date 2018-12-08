@@ -46,6 +46,8 @@ app.use(express.static("public"));
 //Routes
 require("./app/routes/auth.js")(app, passport);
 require("./app/routes/htmlRoutes.js")(app);
+require("./app/routes/userapiRoutes.js")(app);
+require("./app/routes/gameapiRoutes.js")(app);
 
 //Passport Strategies
 require("./app/config/passport/passport.js")(passport, models.User);
