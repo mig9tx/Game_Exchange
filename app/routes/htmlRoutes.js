@@ -5,9 +5,11 @@
 // Dependencies
 // =============================================================
 
-require("../models");
+
 
 const isAuthenticated = require("../config/middleware/isAuthenticated");
+
+require("../models");
 
 // Routes
 // =============================================================

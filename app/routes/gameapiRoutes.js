@@ -1,7 +1,7 @@
 //=========================================================================================
 //api-routes.js - this file offers a set of routes for displaying and saving data to the db
 //==========================================================================================
-const models = require("../models");
+const db = require("../models");
 
 //Routes
 //=============================================================
@@ -14,12 +14,12 @@ module.exports = function(app) {
         }
         //Here we add an "include" property to our option in our findAll query
         //We set the value to an array of the models we want to include in a left outer join
-        //In this case, just models.User
-        models.Game.findAll({
+        //In this case, just db.User
+        db.Game.findAll({
             where: query,
-            include: [models.Author]
-        }).then(function(modelsGame) {
-            res.json(modelsGame);
+            include: [db.User]
+        }).then(function(dbGame) {
+            res.json(dbGame);
         });
     });
 
@@ -27,43 +27,44 @@ module.exports = function(app) {
     app.get("/api/games/:id", function(req, res) {
         //Here we add an "include" property to our option in our findOne query
         //We set the value to an array of the models we want to include in a left outer join
-        //In this case, just models.User
-        models.Game.findOne({
+        //In this case, just db.User
+        db.Game.findOne({
             where: {
                 id: req.params.id
             },
-            include: [models.User]
-        }).then(function(modelsGame) {
-            res.json(modelsGame);
+            include: [db.User]
+        }).then(function(dbGame) {
+            res.json(dbGame);
         });
     });
 
     //POST route for saving a new game
     app.post("/api/games", function(req, res) {
-        models.Game.create(req.body).then(function(modelsGame) {
-            res.json(modelsGame);
+        console.log(req.body);
+        db.Game.create(req.body).then(function(dbGame) {
+            res.json(dbGame);
         });
     });
 
     //DELETE route for deleting games
     app.delete("/api/games/:id", function(req, res) {
-        models.Game.destroy({
+        db.Game.destroy({
             where: {
                 id: req.params.id
             }
-        }).then(function(modelsGame) {
-            res.json(modelsGame);
+        }).then(function(dbGame) {
+            res.json(dbGame);
         });
     });
 
     //PUT route for updating games
     app.put("/api/games", function(req, res) {
-        models.Game.update(req.body, {
+        db.Game.update(req.body, {
             where: {
                 id: req.body.id
             }
-        }).then(function(modelsGame) {
-            res.json(modelsGame);
+        }).then(function(dbGame) {
+            res.json(dbGame);
         });
     });
 };

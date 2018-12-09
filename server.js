@@ -34,7 +34,7 @@ app.engine(
 app.set("view engine", ".hbs");
 
 //Models
-const models = require("./app/models");
+const db = require("./app/models");
 
 // app.get("/", function(req, res) {
 //     res.send("Welcome to Passport with Sequelize");
@@ -44,17 +44,17 @@ const models = require("./app/models");
 app.use(express.static("public"));
 
 //Routes
+require("./app/config/passport/passport.js")(passport, db.User);
 require("./app/routes/auth.js")(app, passport);
-require("./app/routes/htmlRoutes.js")(app);
-require("./app/routes/userapiRoutes.js")(app);
-require("./app/routes/gameapiRoutes.js")(app);
+require("./app/routes/htmlRoutes.js")(app, passport);
+require("./app/routes/userapiRoutes.js")(app, passport);
+require("./app/routes/gameapiRoutes.js")(app, passport);
 
 //Passport Strategies
-require("./app/config/passport/passport.js")(passport, models.User);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-models.sequelize
+db.sequelize
     .sync()
     .then(function() {
         app.listen(PORT, function() {
