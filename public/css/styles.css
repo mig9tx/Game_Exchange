@@ -1,5 +1,5 @@
 
-/* ---------- Login Page -------------------------------- */
+/* ---------- Login  or Signin Page -------------------------------- */
 body {
     height: 100%;
     margin:0px;
@@ -11,7 +11,7 @@ html {
 }
 
 @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
-.login-block{
+.login-block1{
 /* background-image: url();  fallback for old browsers */
 background: url("https://31.media.tumblr.com/642ba8c2b2d9494b3dd6d5b3c60587d0/tumblr_njzjlss9H71tv1qiho1_1280.gif") no-repeat center center fixed; 
 -webkit-background-size: cover;
@@ -27,9 +27,7 @@ font-family: "raleway-heavy", sans-serif;
 
 }
 .banner-sec{background:url(https://assets.vg247.com/current//2014/06/battlefield_41.jpg)  no-repeat left bottom; background-size:cover; min-height:500px; border-radius: 0 10px 10px 0; padding:0;}
-.container{background:rgba(0, 0, 0, 0.733); border-radius: 10px; box-shadow:15px 20px 0px rgba(0,0,0,0.1);}
-.carousel-inner{border-radius:0 10px 10px 0;}
-.carousel-caption{text-align:left; left:5%;}
+.container1{background:rgba(0, 0, 0, 0.733); border-radius: 10px; box-shadow:15px 20px 0px rgba(0,0,0,0.1);}
 .login-sec{padding: 50px 30px; position:relative;}
 .login-sec .copy-text{position:absolute; width:80%; bottom:20px; font-size:13px; text-align:center;}
 .login-sec .copy-text i{color:#FEB58A;}
@@ -37,15 +35,12 @@ font-family: "raleway-heavy", sans-serif;
 .login-sec h2{margin-bottom:30px; font-weight:800; font-size:30px; color: #DE6262;}
 .login-sec h2:after{content:" "; width:100px; height:5px; background:#FEB58A; display:block; margin-top:20px; border-radius:3px; margin-left:auto;margin-right:auto}
 .btn-login{background: #DE6262; color:#fff; font-weight:600;}
-.banner-text{width:70%; position:absolute; bottom:40px; padding-left:20px;}
-.banner-text h2{color:#fff; font-weight:600;}
-.banner-text h2:after{content:" "; width:100px; height:5px; background:#FFF; display:block; margin-top:20px; border-radius:3px;}
-.banner-text p{color:#fff;}
 
 
 
 
-/* Registration Page Styles */
+
+/* Registration or Sign Up Page Styles */
 
 #playground-container {
     height: 500px;
