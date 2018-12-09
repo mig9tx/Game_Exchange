@@ -5,9 +5,11 @@
 // Dependencies
 // =============================================================
 
-require("../models");
+
 
 const isAuthenticated = require("../config/middleware/isAuthenticated");
+
+require("../models");
 
 // Routes
 // =============================================================
@@ -26,8 +28,7 @@ module.exports = function(app) {
 
     // dashboard route
     app.get("/dashboard", isAuthenticated, function(req, res) {
-        res.render("dashboard", { user: req.user });
-        console.log(req.user);
+        res.render("dashboard");
     });
 
     //Edit Post route loads editpost.hbs

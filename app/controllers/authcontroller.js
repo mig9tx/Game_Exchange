@@ -9,7 +9,12 @@ exports.signin = function(req, res) {
 };
 
 exports.dashboard = function(req, res) {
-    res.render("dashboard");
+    const data = {
+        user: req.user,
+        game: req.body.game
+    };
+    console.log(data);
+    res.render("dashboard", data);
 };
 
 exports.logout = function(req, res) {

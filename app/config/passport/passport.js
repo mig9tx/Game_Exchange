@@ -93,17 +93,18 @@ module.exports = function(passport, user) {
     );
     //Serialize user
     passport.serializeUser(function(user, done) {
-        done(null, user.id);
+        done(null, user);
     });
 
     //deserialize User
-    passport.deserializeUser(function(id, done) {
-        User.findById(id).then(function(user) {
-            if (user) {
-                done(null, user.get());
-            } else {
-                done(user.errors, null);
-            }
-        });
+    passport.deserializeUser(function(user, done) {
+        done(null, user);
+        // User.findById(id).then(function(user) {
+        //     if (user) {
+        //         done(null, user.get());
+        //     } else {
+        //         done(user.errors, null);
+        //     }
+        // });
     });
 };
