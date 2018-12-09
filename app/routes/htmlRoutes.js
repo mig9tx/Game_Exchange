@@ -26,7 +26,8 @@ module.exports = function(app) {
 
     // dashboard route
     app.get("/dashboard", isAuthenticated, function(req, res) {
-        res.render("dashboard");
+        res.render("dashboard", { user: req.user });
+        console.log(req.user);
     });
 
     //Edit Post route loads editpost.hbs
