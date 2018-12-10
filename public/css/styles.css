@@ -5337,7 +5337,7 @@ different heights to align properly.
 	width:25%;
 	z-index: 7;
 	left: 75%;
-	bottom: auto;
+	top: 120%;
   }
 
   .titleone {
