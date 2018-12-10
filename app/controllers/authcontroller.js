@@ -10,8 +10,15 @@ exports.signin = function(req, res) {
 
 exports.dashboard = function(req, res) {
     const data = {
-        user: req.user,
-        game: req.body.game
+        user: req.user
+    };
+    console.log(data);
+    res.render("dashboard", data);
+};
+
+exports.postGame = function(req, res) {
+    const data = {
+        user: req.user
     };
     console.log(data);
     res.render("dashboard", data);
