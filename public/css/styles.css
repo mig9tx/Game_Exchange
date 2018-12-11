@@ -5328,7 +5328,7 @@ different heights to align properly.
 	width:40%;
 	z-index: 7;
 	left: 65%;
-	top: auto;
+	top: 15%;
   }
 
   .robot {
@@ -5337,7 +5337,7 @@ different heights to align properly.
 	width:25%;
 	z-index: 7;
 	left: 75%;
-	top: 120%;
+	top: 140%;
   }
 
   .titleone {
