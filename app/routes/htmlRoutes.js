@@ -5,11 +5,9 @@
 // Dependencies
 // =============================================================
 
-
+require("../models");
 
 const isAuthenticated = require("../config/middleware/isAuthenticated");
-
-require("../models");
 
 // Routes
 // =============================================================
@@ -38,7 +36,7 @@ module.exports = function(app) {
 
     //Post Game route loads postgame.hbs
     app.get("/postgame", isAuthenticated, function(req, res) {
-        res.render("postgame");
+        res.render("postgame", { user: req.user });
     });
 
     //Sign in route loads signin.hbs

@@ -19,6 +19,7 @@ module.exports = function(app, passport) {
             failureRedirect: "/signin"
         })
     );
+    app.post("/postData", authController.postGame);
 
     function isLoggedIn(req, res, next) {
         if (req.isAuthenticated()) {

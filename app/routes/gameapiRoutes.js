@@ -41,7 +41,11 @@ module.exports = function(app) {
     //POST route for saving a new game
     app.post("/api/games", function(req, res) {
         console.log(req.body);
-        db.Game.create(req.body).then(function(dbGame) {
+        console.log(req.user.id);
+        console.log(req.User);
+        const game = req.body;
+        game["UserId"] = req.user.id;
+        db.Game.create(game).then(function(dbGame) {
             res.json(dbGame);
         });
     });
