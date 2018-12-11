@@ -8,9 +8,7 @@
         <input type="text" id="gameConsole" name="gameConsole">
         <button id="submit-button" type="submit">Search</button>
     </form>
-    {{user}}
 
-    {{gameData.gameTitle}}
 
     <div id="games">
         <h2>Game Search Results</h2>
@@ -25,7 +23,7 @@
 
 
     <script>
-
+{{!-- const axios = require("axios"); --}}
         let gameTitle = "";
         let gameConsole = "";
         let resultData = {};
@@ -57,7 +55,6 @@
                 gsPriceSell: gsPriceSell,
                 userSellPrice: userSellPrice,
             };
-            console.log("this is the game" + game);
             $.ajax({
                 type: "POST",
                 data: JSON.stringify(game),
