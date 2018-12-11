@@ -1,0 +1,27 @@
+<body>
+    <h1>Hello {{user.firstname}}</h1>
+
+    <div id="user-games">
+		
+		<table id="games">
+		<tr>
+			<td>Game Title</td>
+			<td>Game System</td>
+			<td>Game Stop Trade</td>
+			<td>Game Stop Sell</td>
+			<td>Suggest Seller Price</td>
+
+		</tr>
+		{{#each dbGames}}
+		<tr>
+		<td>{{title}}</td>
+		<td>{{console}}</td>
+		<td>{{gsPriceBuy}}</td>
+		<td>{{gsPriceSell}}</td>
+		<td>{{userSellPrice}}
+        <button email={{user.email}}>Email Seller</button></td>
+        
+		</tr>
+		{{/each}}
+		</table>
+    </div>

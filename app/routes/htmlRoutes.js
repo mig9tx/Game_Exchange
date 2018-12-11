@@ -39,6 +39,11 @@ module.exports = function(app) {
         res.render("postgame", { user: req.user });
     });
 
+    //Displays all games for sale
+    app.get("/searchgame", isAuthenticated, function(req, res) {
+        res.render("searchgame");
+    });
+
     //Sign in route loads signin.hbs
     app.get("/signin", function(req, res) {
         res.render("signin");
