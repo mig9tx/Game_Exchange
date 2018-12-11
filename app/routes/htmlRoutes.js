@@ -55,9 +55,9 @@ module.exports = function(app) {
     });
 
     //User logs out of account
-    // app.get("/logout", function(req, res) {
-    //     req.logout();
-    //     res.redirect("/");
-    //     console.log("You're logged out");
-    // });
+    app.get("/logout", function(req, res) {
+        req.logout();
+        res.redirect("/");
+        console.log("You're logged out");
+    });
 };
