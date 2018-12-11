@@ -12,7 +12,6 @@ exports.signin = function(req, res) {
 };
 
 exports.dashboard = function(req, res) {
-    
     const query = {};
     if (req.query.user_id) {
         query.UserId = req.query.user_id;
@@ -21,20 +20,29 @@ exports.dashboard = function(req, res) {
     //We set the value to an array of the models we want to include in a left outer join
     //In this case, just db.User
     db.Game.findAll({
-        where: { UserId: req.user.id }
+        where: {
+            UserId: req.user.id
+        }
         // include: [db.User]
     }).then(function(dbGame) {
         // console.log(dbGame);
         // console.log(req.user);
-        console.log('*******************************************************************************')
         console.log(dbGame);
-        res.render("dashboard", { dbGames: dbGame, user: req.user });  //JSON.stringify
+        res.render("dashboard", {
+            dbGames: dbGame,
+            user: req.user
+        }); //JSON.stringify
     });
- 
 };
 
 exports.postGame = function(req, res) {
-    const url = "https://www.pricecharting.com/api/products?" + process.env.PRICE_KEY + "&q=" + req.body.gameTitle + " " + req.body.gameConsole
+    const url =
+        "https://www.pricecharting.com/api/products?" +
+        process.env.PRICE_KEY +
+        "&q=" +
+        req.body.gameTitle +
+        " " +
+        req.body.gameConsole;
     axios.get(url).then((response) => {
         res.json(response.data);
     });
@@ -46,8 +54,8 @@ exports.postGame = function(req, res) {
     // res.render("dashboard", data);
 };
 
-exports.logout = function (req, res) {
-    req.session.destroy(function () {
+exports.logout = function(req, res) {
+    req.session.destroy(function() {
         req.logout();
         res.redirect("/");
     });
@@ -61,12 +69,15 @@ exports.searchgame = (req, res) => {
     //We set the value to an array of the models we want to include in a left outer join
     //In this case, just db.User
     db.Game.findAll({
-        where: { UserId: { $notIn: [req.user.id] } }
+        where: {
+            UserId: {
+                $notIn: [req.user.id]
+            }
+        }
         // include: [db.User]
-    }).then(function (dbGame) {
+    }).then(function(dbGame) {
         // console.log(dbGame);
         // console.log(req.user);
-        console.log('*******************************************************************************')
         console.log(dbGame);
         res.render("searchgame", {
             dbGames: dbGame,
