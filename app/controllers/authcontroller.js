@@ -90,11 +90,11 @@ exports.postGame = function (req, res) {
         res.json(response.data);
     });
 
-    // const data = {
-    //     user: req.user
-    // };
-    // console.log(data);
-    // res.render("dashboard", data);
+    const data = {
+        user: req.user
+    };
+    console.log(data);
+    res.render("postGame", data);
 };
 
 exports.searchgame = (req, res) => {
