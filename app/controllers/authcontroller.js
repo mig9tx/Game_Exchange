@@ -35,6 +35,23 @@ exports.dashboard = function(req, res) {
     });
 };
 
+exports.getImg = function(req, res) {
+    const url = "https://api-endpoint.igdb.com/games/?search=" + req.body.gameTitle + "&fields=cover";
+
+    axios.get( url, {
+    headers: {
+      "user-key": process.env.IGDB_KEY,
+      Accept: "application/json"
+    }
+    })
+    .then(response => {
+        res.json(response.data);
+    })
+    .catch(e => {
+        console.log("error", e);
+    });
+};
+
 exports.postGame = function(req, res) {
     const url =
         "https://www.pricecharting.com/api/products?" +
@@ -44,11 +61,11 @@ exports.postGame = function(req, res) {
         " " +
         req.body.gameConsole;
 
-    console.log(url);
-
     axios.get(url).then((response) => {
         res.json(response.data);
     });
+
+
 
     // const data = {
     //     user: req.user
