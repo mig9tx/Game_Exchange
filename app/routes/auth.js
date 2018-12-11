@@ -21,6 +21,8 @@ module.exports = function(app, passport) {
         })
     );
     app.post("/postData", authController.postGame);
+    app.post("/getImg", authController.getImg);
+
 
     function isLoggedIn(req, res, next) {
         if (req.isAuthenticated()) {

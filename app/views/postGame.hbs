@@ -367,7 +367,6 @@
 
 
             <script>
-
                 let gameTitle = "";
                 let gameConsole = "";
                 let resultData = {};
@@ -391,29 +390,38 @@
                     console.log(gsPriceSell);
                     console.log(userSellPrice);
 
-                    let game = {
-                        title: title,
-                        console: system,
-                        image: "no Image url yet",
-                        gsPriceBuy: gsPriceBuy,
-                        gsPriceSell: gsPriceSell,
-                        userSellPrice: userSellPrice,
-                    };
-                    console.log("this is the game" + game);
                     $.ajax({
-                        type: "POST",
-                        data: JSON.stringify(game),
-                        url: "api/games",
-                        contentType: "application/json"
+                        url: "/getImg",
+                        method: "POST",
+                        data: { gameTitle: title }
+                    }).then(function (data) {
+
+                        let imgThumb = data[0].cover.url;
+
+                        let game = {                            
+                            title: title,
+                            console: system,
+                            image: imgThumb.replace("thumb", "1080p"),
+                            gsPriceBuy: gsPriceBuy,
+                            gsPriceSell: gsPriceSell,
+                            userSellPrice: userSellPrice,
+                        };
+
+                        $.ajax({
+                            type: "POST",
+                            data: JSON.stringify(game),
+                            url: "api/games",
+                            contentType: "application/json"
+                        });
+                        $("#gameResults").empty();
                     });
-                    $("#gameResults").empty();
                 }
+
 
                 $("#game-find").submit(function (event) {
                     event.preventDefault();
                     gameTitle = $("#title").val();
                     gameConsole = $("#gameConsole").val();
-
 
                     $.ajax({
                         url: "/postData",
