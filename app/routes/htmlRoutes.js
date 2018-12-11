@@ -35,8 +35,8 @@ module.exports = function(app) {
     });
 
     //Post Game route loads postgame.hbs
-    app.get("/postgame", isAuthenticated, function(req, res) {
-        res.render("postgame", { user: req.user });
+    app.get("/postGame", isAuthenticated, function(req, res) {
+        res.render("postGame", { user: req.user });
     });
 
     //Sign in route loads signin.hbs
