@@ -3,11 +3,11 @@ const db = require("../models");
 
 exports = module.exports = {};
 
-exports.signup = function (req, res) {
+exports.signup = function(req, res) {
     res.render("signup");
 };
 
-exports.signin = function (req, res) {
+exports.signin = function(req, res) {
     res.render("signin");
 };
 
@@ -35,8 +35,7 @@ exports.signin = function (req, res) {
 //         }); //JSON.stringify
 //     });
 // };
-exports.dashboard = function (req, res) {
-
+exports.dashboard = function(req, res) {
     const query = {};
     if (req.query.user_id) {
         query.UserId = req.query.user_id;
@@ -49,7 +48,7 @@ exports.dashboard = function (req, res) {
             UserId: req.user.id
         }
         // include: [db.User]
-    }).then(function (dbGame) {
+    }).then(function(dbGame) {
         // console.log(dbGame);
         // console.log(req.user);
         // console.log('*******************************************************************************')
@@ -83,8 +82,14 @@ exports.dashboard = function (req, res) {
     // console.log(data.gameData);
 };
 
-exports.postGame = function (req, res) {
-    const url = "https://www.pricecharting.com/api/products?" + process.env.PRICE_KEY + "&q=" + req.body.gameTitle + " " + req.body.gameConsole
+exports.postGame = function(req, res) {
+    const url =
+        "https://www.pricecharting.com/api/products?" +
+        process.env.PRICE_KEY +
+        "&q=" +
+        req.body.gameTitle +
+        " " +
+        req.body.gameConsole;
     console.log(url);
     axios.get(url).then((response) => {
         res.json(response.data);
@@ -108,10 +113,10 @@ exports.searchgame = (req, res) => {
     db.Game.findAll({
         where: { UserId: { $notIn: [req.user.id] } }
         // include: [db.User]
-    }).then(function (dbGame) {
+    }).then(function(dbGame) {
         // console.log(dbGame);
         // console.log(req.user);
-        console.log('*******************************************************************************')
+        // console.log('*******************************************************************************')
         console.log(dbGame);
         res.render("searchgame", {
             dbGames: dbGame,
@@ -120,8 +125,8 @@ exports.searchgame = (req, res) => {
     });
 };
 
-exports.logout = function (req, res) {
-    req.session.destroy(function () {
+exports.logout = function(req, res) {
+    req.session.destroy(function() {
         req.logout();
         res.redirect("/");
     });
