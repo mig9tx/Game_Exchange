@@ -42,7 +42,13 @@ exports.dashboard = function(req, res) {
 };
 
 exports.postGame = function(req, res) {
-    const url = "https://www.pricecharting.com/api/products?" + process.env.PRICE_KEY + "&q=" + req.body.gameTitle + " " + req.body.gameConsole
+    const url =
+        "https://www.pricecharting.com/api/products?" +
+        process.env.PRICE_KEY +
+        "&q=" +
+        req.body.gameTitle +
+        " " +
+        req.body.gameConsole;
     console.log(url);
     axios.get(url).then((response) => {
         res.json(response.data);
@@ -55,46 +61,8 @@ exports.postGame = function(req, res) {
     // res.render("dashboard", data);
 };
 
-exports.searchGame = (req, res) => {
-    const data = {
-        user: req.user
-    };
-
-    const {
-        gameTitle,
-        gameConsole
-    } = req.body;
-
-    const url = `https://www.pricecharting.com/api/products?${process.env.PRICE_KEY}&q=${gameTitle} ${gameConsole}`;
-
-    console.log(url);
-    axios.get(url).then((response) => {
-        const {
-            gameTitle,
-            gamePrice,
-            gameStopPrice
-        } = response.data;
-        data.gameData = {
-            gameTitle,
-            gamePrice, //gamePrice: gamePrice
-            gameStopPrice
-        };
-
-        data.table = [{
-                myObj: 'value1'
-            },
-            {
-                myObj: 'valu2'
-            }
-        ];
-
-        res.render("postGame", data);
-    });
-
-};
-
-exports.logout = function (req, res) {
-    req.session.destroy(function () {
+exports.logout = function(req, res) {
+    req.session.destroy(function() {
         req.logout();
         res.redirect("/");
     });

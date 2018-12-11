@@ -44,6 +44,7 @@ module.exports = function(app) {
         console.log(req.user.id);
         console.log(req.User);
         const game = req.body;
+        // eslint-disable-next-line dot-notation
         game["UserId"] = req.user.id;
         db.Game.create(game).then(function(dbGame) {
             res.json(dbGame);
