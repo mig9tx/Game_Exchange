@@ -9,40 +9,92 @@
   <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
-
 <body>
-  <header id="main-header">
+    <!-- header ================================================== -->
+    <header id="main-header">
+        <div class="row">
 
-    <div class="row">
+            <!-- navbar ================================================== -->
+            <nav id="nav-wrap">
 
-      <nav id="nav-wrap">
+                <a class="mobile-btn" href="#nav-wrap" title="Show navigation">
+                    <span class="menu-icon">Menu</span>
+                </a>
+                <a class="mobile-btn" href="#" title="Hide navigation">
+                    <span class="menu-icon">Menu</span>
+                </a>
 
-        <a class="mobile-btn" href="#nav-wrap" title="Show navigation">
-          <span class="menu-icon">Menu</span>
-        </a>
-        <a class="mobile-btn" href="#" title="Hide navigation">
-          <span class="menu-icon">Menu</span>
-        </a>
+                <ul id="nav" class="nav">
+                    <li><a class="smoothscroll" href="/signup">Signup.</a></li>
+                    <li class="current"><a class="smoothscroll" href="/signin">Signin.</a></li>
+                    <li><a class="smoothscroll" href="/dashboard">Dashboard.</a></li>
+                    <li><a class="smoothscroll" href="/searchgame">Searchgame.</a></li>
+                    <li><a class="smoothscroll" href="/postGame">Postgame.</a></li>
+                    <li><a class="smoothscroll" href="/logout">Logout.</a></li>
+                </ul> <!-- end #nav -->
 
-        <ul id="nav" class="nav">
-          <li><a class="smoothscroll" href="/signup">Signup.</a></li>
-          <li class="current"><a class="smoothscroll" href="/signin">Signin.</a></li>
-          <li><a class="smoothscroll" href="/dashboard">Dashboard.</a></li>
-          <li><a class="smoothscroll" href="/searchgame">Searchgame.</a></li>
-          <li><a class="smoothscroll" href="/postGame">Postgame.</a></li>
-          <li><a class="smoothscroll" href="/logout">Logout.</a></li>
-        </ul> <!-- end #nav -->
-      </nav> <!-- end #nav-wrap -->
+            </nav> <!-- end #nav-wrap -->
 
+        </div>
+
+    </header> <!-- end header -->
+
+
+    <!-- postGame Homepage hero
+   ================================================== -->
+    <section id="hero">
+
+        <div class="row hero-content">
+
+            <div class="twelve columns hero-container">
+
+                <!-- hero-slider start-->
+                <div id="hero-slider" class="flexslider">
+
+                    <ul class="">
+
+                        <!-- slide -->
+                        <li>
+                            <div class="flex-caption">
+                                <h1 class="titleone">Game On <span class="gametitle">{{user.firstname}}!</span> You are Logged In.
+                                </h1>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- postGame Picture -->
+                    <aside id="fh5co-hero" class="js-fullheight video">
+                        <div> <img src="https://www.pcgamesn.com/wp-content/uploads/2018/08/Fallout-76-system-requirements-900x507.png"
+                                style="height:100%; width:100%;"></div>
+                        {{!-- End Picture --}}
+
+                </div> <!-- end twelve columns-->
+            </div> <!-- end row -->
+    </section> <!-- end homepage hero -->
+
+
+    <!-- Results Section
+   ================================================== -->
+
+    <div id="hero-slider" class="flexslider">
+
+        <ul class="">
+
+            <!-- slide -->
+            <li>
+                <div class="flex-caption">
+                    <h1 class="titleone">Dashboard <span class="gametitle">Results</span> .
+                    </h1>
+                </div>
+            </li>
+        </ul>
     </div>
 
-  </header> <!-- end header -->
 
-  <h2>Dashboard</h2>
 
-  <h5>Game On {{user.firstname}}! You are Logged In.</h5>
+  {{!-- Dashboard --}}
+  
   <div id="games">
-
   </div>
 
 
