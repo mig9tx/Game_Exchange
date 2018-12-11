@@ -10,6 +10,7 @@ module.exports = function(app, passport) {
             failureRedirect: "/signup"
         })
     );
+    app.get("/searchgame", isLoggedIn, authController.searchgame);
     app.get("/dashboard", isLoggedIn, authController.dashboard);
     app.get("/logout", authController.logout);
     app.post(
