@@ -1,12 +1,121 @@
-<body>
-    <form class="create-form">
-        <div class="form-group">
-            <label for="title">Game Name:</label>
-            <input type="text" id="title" name="title">
-            <label for="console">Game Console:</label>
-            <input type="text" id="console" name="console">
-            <button type="submit">Search</button>
-        </div>
 
+
+<body>
+    <form id="game-find">
+        <label for="title">Game Name:</label>
+        <input type="text" id="title" name="title">
+        <label for="console">Game Console:</label>
+        <input type="text" id="gameConsole" name="gameConsole">
+        <button id="submit-button" type="submit">Search</button>
     </form>
+    {{user}}
+
+    {{gameData.gameTitle}}
+
+    <div id="games">
+        <h2>Game Search Results</h2>
+        <br>
+        <table id="gameResults">
+            <th>Game Name</th>
+            <th>Console</th>
+            <th>GameStop Buy Price</th>
+            <th>GameStop Sell Price</th>
+        </table>
+    </div>
+
+
+    <script>
+
+        let gameTitle = "";
+        let gameConsole = "";
+        let resultData = {};
+
+        function addGametoDB(element) {
+            let value = element.value;
+            console.log(value);
+            let j = value;
+            console.log(j);
+            console.log(resultData);
+            let title = resultData[j]["product-name"];
+            let system = resultData[j]["console-name"];
+            let gsPriceBuy = (Number.parseFloat(resultData[j]["gamestop-trade-price"]) / 100).toFixed(2);
+            let gsPriceSell = (Number.parseFloat(resultData[j]["gamestop-price"]) / 100).toFixed(2);
+            let userSellPrice = (Number.parseFloat(0.85 * gsPriceSell).toFixed(2));
+
+            console.log('----------- In add Game to dB-----------------------')
+            console.log(title);
+            console.log(system);
+            console.log(gsPriceBuy);
+            console.log(gsPriceSell);
+            console.log(userSellPrice);
+
+            let game = {
+                title: title,
+                console: system,
+                image: "no Image url yet",
+                gsPriceBuy: gsPriceBuy,
+                gsPriceSell: gsPriceSell,
+                userSellPrice: userSellPrice,
+            };
+            console.log("this is the game" + game);
+            $.ajax({
+                type: "POST",
+                data: JSON.stringify(game),
+                url: "api/games",
+                contentType: "application/json"
+            });
+            $("#gameResults").empty();
+        }
+
+        $("#game-find").submit(function (event) {
+            event.preventDefault();
+            gameTitle = $("#title").val();
+            gameConsole = $("#gameConsole").val();
+
+
+            $.ajax({
+                url: "/postData",
+                method: "POST",
+                data: {
+                    gameTitle: gameTitle,
+                    gameConsole: gameConsole
+                }
+            }).then(function (data) {
+                resultData = data.products;
+                console.log(resultData);
+                console.log(data);
+                console.log(data.products);
+                console.log(data.products[0]["product-name"]);
+                console.log(data.products[0]["console-name"]);
+                console.log(data.products[0]["gamestop-trade-price"]);
+                console.log(data.products[0]["gamestop-price"]);
+                $("#gameResults").append("<h3>Select Your Game</h3>");
+                for (let i = 0; i < data.products.length && i <= 6; i++) {
+                    let row = $("<tr id='game'>");
+                    let gameTitle = data.products[i]["product-name"];
+                    let gameConsole = data.products[i]["console-name"];
+                    let gsPriceBuy = (Number.parseFloat(data.products[i]["gamestop-trade-price"]) / 100).toFixed(2);
+                    let gsPriceSell = (Number.parseFloat(data.products[i]["gamestop-price"]) / 100).toFixed(2);
+                    row.attr('index', i);
+                    row.append("<td>" + gameTitle + "</td>");
+                    row.append("<td>" + gameConsole + "</td>");
+                    row.append("<td>" + gsPriceBuy + "</td>");
+                    row.append("<td>" + gsPriceSell + "</td>");
+                    let button = $("<button id='button" + i + "' onclick='addGametoDB(this)' value='" + i + "'>SELECT</button>");
+                    row.append(button);
+                    $("#gameResults").append(row);
+                }
+
+            });
+
+            //     function getGameImage(){
+            //         $.ajax({ 
+            //       url: "https://www.pricecharting.com/api/products?" + PRICE_KEY + "&q=" + gameTitle + " " + gameConsole, 
+            //       method: "GET" 
+            //     }).then(function(results) {
+            //     });
+        });
+    </script>
 </body>
+
+</html>

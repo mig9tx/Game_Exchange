@@ -1,82 +1,391 @@
+<body>
 
-{{!-- Miguels Code for Signup --}}
-    <form id="signup" name="signup" method="post" action="/signup">
-        <label for="email">Email Address</label>
-        <input class="text" name="email" type="email" />
-        <label for="firstname">Firstname</label>
-        <input class="text" name="firstname" type="text" />
-        <label for="lastname">Lastname</label>
-        <input class="text" name="lastname" type="text" />
-        <label for="password">Password</label>
-        <input class="text" name="password" type="password" />
-        <label for="zipcode">Zipcode</label>
-        <input class="text" name="zipcode" type="text" />
-        <input class="btn" type="submit" value="Sign Up" />
-    </form>
+	<!-- header
+   ================================================== -->
+	<header id="main-header">
+
+		<div class="row">
+
+			<!-- <div class="logo">
+                <a href="index.html">Game-Exchange</a>
+            </div> -->
+
+			<nav id="nav-wrap">
+
+				<a class="mobile-btn" href="#nav-wrap" title="Show navigation">
+					<span class="menu-icon">Menu</span>
+				</a>
+				<a class="mobile-btn" href="#" title="Hide navigation">
+					<span class="menu-icon">Menu</span>
+				</a>
+
+				<ul id="nav" class="nav">
+					<li><a class="smoothscroll" href="#hero">Home.</a></li>
+					<li class="current"><a class="smoothscroll" href="#portfolio">Buy.</a></li>
+					<li><a class="smoothscroll" href="#services">Sell.</a></li>
+					<li><a class="smoothscroll" href="#about">Team.</a></li>
+					<!-- <li><a class="smoothscroll" href="#contact">Contact.</a></li> -->
+				</ul> <!-- end #nav -->
+
+			</nav> <!-- end #nav-wrap -->
+			<!-- 
+            <ul class="header-social">
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+            </ul> -->
+
+		</div>
+
+	</header> <!-- end header -->
 
 
-{{!-- Didi's Code Test --}}
-    	{{!-- <div class="container">
-			<div class="row main">
-				<div class="main-login main-center">
-				<h5>Sign up once and watch any of our free demos.</h5>
-					<form class="" method="post" action="#">
-						
-						<div class="form-group">
-							<label for="name" class="cols-sm-2 control-label">Your Name</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name"/>
-								</div>
+	<!-- homepage hero
+   ================================================== -->
+	<section id="hero">
+
+		<div class="row hero-content">
+
+			<div class="twelve columns hero-container">
+
+				<!-- hero-slider start-->
+				<div id="hero-slider" class="flexslider">
+
+					<ul class="">
+
+						<!-- slide -->
+						<li>
+							<div class="flex-caption">
+								<h1 class="titleone">Say hello to <span class="gametitle">Game</span> Exchange.
+								</h1>
+
+								<h3 class="">Take the middle man out. Trade with gamers near you. </h3>
 							</div>
-						</div>
+						</li>
+					</ul>
+					<div> <img src="https://i0.wp.com/img32.imageshack.us/img32/8798/bz1l.png" class="man"></div>
 
-						<div class="form-group">
-							<label for="email" class="cols-sm-2 control-label">Your Email</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
-								</div>
-							</div>
-						</div>
+					<!-- Login-page -->
+					<div class="login-page">
+						<div class="form">
 
-						<div class="form-group">
-							<label for="username" class="cols-sm-2 control-label">Username</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
-								</div>
-							</div>
-						</div>
+							<form id="signup" class="login-form" name="signup" method="post" action="/signup">
 
-						<div class="form-group">
-							<label for="password" class="cols-sm-2 control-label">Password</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
-								</div>
-							</div>
-						</div>
+								<input type="email" class="text" name="email" placeholder="email" />
+								<input type="text" class="text" name="firstname" placeholder="first name" />
+								<input type="text" class="text" name="lastname" placeholder="last name" />
+								<input type="password" class="text" name="password" placeholder="password" />
+								<input type="text" class="text" name="zipcode" placeholder="zipcode" />
+								<input class="btn" type="submit" value="Sign Up" />
 
-						<div class="form-group">
-							<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
-							<div class="cols-sm-10">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
-								</div>
-							</div>
+								<p class="message">Already registered? <a href="/signin">Sign In</a></p>
+							</form>
 						</div>
-
-						<div class="form-group ">
-							<a href="https://deepak646.blogspot.com/" target="_blank" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">Register</a>
-						</div>
-						
-					</form>
+					</div>
 				</div>
-			</div>
+
+				<!-- Video -->
+
+
+				<aside id="fh5co-hero" class="js-fullheight video">
+					<video autoplay muted loop id="myVideo">
+						<source src="./images/gameexchangefinal.mp4" type="video/mp4">
+						Your browser does not support HTML5 video.
+					</video>
+
+
+					{{!-- End Video --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<!-- end hero-slider -->
+					<!-- <video width="100" style = width:100%; style = height:100px;>
+                    <source src="https://s3.envato.com/h264-video-previews/3d1f041c-dab3-4177-8165-0f462c655738/1695894.mp4" type="video/mp4">
+                  </video> -->
+					<!-- <img src="https://image.redbull.com/rbcom/010/2016-10-17/1331824259802_2/0100/0/1/nine-tips-to-survive-battlefield-1.jpg"> -->
+
+
+			</div> <!-- end twelve columns-->
+
+		</div> <!-- end row -->
+
+		{{!-- <div id="more">
+			<a class="smoothscroll" href="#services">More About Us<i class="fa fa-angle-down"></i></a>
 		</div> --}}
+
+	</section> <!-- end homepage hero -->
+
+
+	<!-- portfolio
+   ================================================== -->
+	<section id="portfolio">
+
+		<div class="row section-head">
+
+			<!-- <div class="twelve columns">
+
+                <h1>BUY NOW<span>.</span></h1>
+
+                <hr /> -->
+
+			<!-- <p>cheaper.</p> -->
+
+			<!-- </div> -->
+			<!-- 
+            <div class="twelve columns container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2></h2>
+                        <div id="custom-search-input">
+                            <div class="input-group col-md-12">
+                                <input type="text" class="form-control input-lg" placeholder="What game are you looking for?" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-info btn-lg" type="button">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+		</div> <!-- end section-head -->
+
+		<div> <img src="https://vignette.wikia.nocookie.net/me3mp/images/6/65/Character_Battlefield_3_Soldier.png/revision/latest?cb=20130421203448"
+			 class="robot"></div> 
+
+
+		<div class="flex-caption">
+			<h1 class="titleone">Choose from <span class="gametitle">Thousands</span> of Games.
+			</h1>
+
+			<h3 class="">Register or Sign in to start.</h3>
+		</div>
+		<div class="row items">
+
+			<!-- portfolio-wrapper -->
+			<div id="portfolio-wrapper" class="bgrid-fourth s-bgrid-third tab-bgrid-half">
+
+				<div class="bgrid folio-item">
+					<div class="item-wrap">
+						<a href="signin">
+							<img src="https://images.igdb.com/igdb/image/upload/t_cover_big/fldfc6vwqjtrmogaxj4k.jpg" alt="c">
+							<div class="overlay"></div>
+							<div class="portfolio-item-meta">
+								<h5>Assassins Creed Odyssey</h5>
+								<p>Genre: Adventure, Role-playing (RPG)</p>
+								<p>Platforms: Xbox One, PC (Microsoft Windows), PlayStation 4</p>
+							</div>
+						</a>
+					</div>
+				</div> <!-- item end -->
+
+				<div class="bgrid folio-item">
+					<div class="item-wrap">
+						<a href="signin">
+							<img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1hgx.jpg" alt="">
+							<div class="overlay">
+								<div class="portfolio-item-meta">
+									<h5>Fallout 76</h5>
+									<p>Genre: Role-playing (RPG), Shooter</p>
+									<p>Platforms: Xbox One, PC (Microsoft Windows), PlayStation 4)</p>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div> <!-- item end -->
+
+				<div class="bgrid folio-item">
+					<div class="item-wrap">
+						<a href="signin">
+							<img src="https://images.igdb.com/igdb/image/upload/t_cover_big/l2ltgopqksr4jugxne6e.jpg" alt="">
+							<div class="overlay">
+								<div class="portfolio-item-meta">
+									<h5>Red Faction: Guerrilla Re-Mars-tered</h5>
+									<p>Genre: Shooter Versions: See 2 more versions of this game</p>
+									<p>Platforms: Mac, PlayStation 2, PC (Microsoft Windows), PlayStation Network, N-Gage</p>
+								</div>
+							</div>
+
+						</a>
+					</div>
+				</div>
+
+				<!-- item end -->
+
+				<div class="bgrid folio-item">
+					<div class="item-wrap">
+						<a href="signin">
+							<img src="https://images.igdb.com/igdb/image/upload/t_cover_big/kuubqp9sy10u0yqwkwdq.jpg" alt="" style="height:350px;">
+							<div class="overlay">
+								<div class="portfolio-item-meta">
+									<h5>Beyond Good Evil </h5>
+									<p>Genre(s) Action-adventure</p>
+									<p>Platforms: Xbox One, PC (Microsoft Windows), PlayStation 4)</p>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<!-- item end -->
+				<div class="bgrid folio-item">
+					<div class="item-wrap">
+						<a href="signin">
+							<img src="https://images.igdb.com/igdb/image/upload/t_cover_big/edkpgyqgfsxyiby9pyj5.jpg" alt="c">
+							<div class="overlay"></div>
+							<div class="portfolio-item-meta">
+								<h5>Rocket League</h5>
+								<p>Genre: Indie, Racing, Sport</p>
+								<p>Platforms: Xbox One, PC (Microsoft Windows), PlayStation 4)</p>
+							</div>
+						</a>
+					</div>
+				</div> <!-- item end -->
+
+				<div class="bgrid folio-item">
+					<div class="item-wrap">
+						<a href="signin">
+							<img src="https://images.igdb.com/igdb/image/upload/t_cover_big/yfk9f2lbo0r7slytuhra.jpg" alt="">
+							<div class="overlay">
+								<div class="portfolio-item-meta">
+									<h5>Red Dead Redemption II</h5>
+									<p>Genre: Adventure, Role-playing (RPG), Shooter</p>
+									<p>Platforms: Xbox One, PC (Microsoft Windows), PlayStation 4)</p>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div> <!-- item end -->
+
+				<div class="bgrid folio-item">
+					<div class="item-wrap">
+						<a href="signin">
+							<img src="https://images.igdb.com/igdb/image/upload/t_cover_big/xzlxmbz8mzes8wzseijy.jpg" alt="">
+							<div class="overlay">
+								<div class="portfolio-item-meta">
+									<h5>Spiderman</h5>
+									<p>Genre: Adventure, Fighting</p>
+									<p>Platforms: Xbox One, PC (Microsoft Windows), PlayStation 4)</p>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<!-- item end -->
+
+				<div class="bgrid folio-item">
+					<div class="item-wrap smoothscroll">
+						<a href="signin">
+							<img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1hsk.jpg" alt="">
+							<div class="overlay">
+								<div class="portfolio-item-meta">
+									<h5>Call of Duty </h5>
+									<p>Genre(s) Shooter</p>
+									<p>Platforms: Xbox One, PC (Microsoft Windows), PlayStation 4)</p>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<!-- item end -->
+
+				<div class="bgrid folio-item">
+					<div class="item-wrap smoothscroll">
+						<a href="signin">
+							<img src="https://images.igdb.com/igdb/image/upload/t_cover_big/t59mxa13lrt98iyi2xol.jpg" alt="">
+							<div class="overlay">
+								<div class="portfolio-item-meta">
+									<h5>Super Smash Bros </h5>
+									<p>Genre(s) Fighting</p>
+									<p>Platforms: Xbox One, PC (Microsoft Windows), PlayStation 4)</p>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<!-- item end -->
+				<div class="bgrid folio-item">
+					<div class="item-wrap smoothscroll">
+						<a href="signin">
+							<img src="https://images.igdb.com/igdb/image/upload/t_cover_big/tri1c6vbydeosoqajwt1.jpg" alt="">
+							<div class="overlay">
+								<div class="portfolio-item-meta">
+									<h5>Witcher </h5>
+									<p>Genre(s) Adventure, Role-playing (RPG)</p>
+									<p>Platforms: Xbox One, PC (Microsoft Windows), PlayStation 4)</p>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<!-- item end -->
+				<div class="bgrid folio-item">
+					<div class="item-wrap smoothscroll">
+						<a href="signin">
+							<img src="https://images.igdb.com/igdb/image/upload/t_cover_big/cintjlnx6o8qyqtcnajl.jpg" alt="">
+							<div class="overlay">
+								<div class="portfolio-item-meta">
+									<h5>God Of War </h5>
+									<p>Adventure, Platform, Role-playing (RPG)</p>
+									<p>Platforms: Xbox One, PC (Microsoft Windows), PlayStation 4)</p>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<!-- item end -->
+				<div class="bgrid folio-item">
+					<div class="item-wrap smoothscroll">
+						<a href="signin">
+							<img src="https://images.igdb.com/igdb/image/upload/t_cover_big/lcy8csmxbak1hnx9kwqg.jpg" alt="">
+							<div class="overlay">
+								<div class="portfolio-item-meta">
+									<h5>Fortnite </h5>
+									<p>Genre(s) Adventure, Role-playing (RPG), Shooter, Simulator, Sport</p>
+									<p>Platforms: Xbox One, PC (Microsoft Windows), PlayStation 4)</p>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<!-- item end -->
+				<div class="bgrid folio-item">
+					<div class="item-wrap smoothscroll">
+						<a href="signin">
+							<div class="overlay">
+								<div class="portfolio-item-meta">
+									<h5>Fortnite </h5>
+									<p>Genre(s) Adventure, Role-playing (RPG), Shooter, Simulator, Sport</p>
+									<p>Platforms: Xbox One, PC (Microsoft Windows), PlayStation 4)</p>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+
+
+				{{!-- <div>
+					<ul class="copyright">
+						<li>&copy; Copyright 2018 Game-Exchange.</li>
+					</ul>
+				</div> --}}
+
+</body>
