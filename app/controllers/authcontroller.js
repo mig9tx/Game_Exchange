@@ -43,6 +43,9 @@ exports.postGame = function(req, res) {
         req.body.gameTitle +
         " " +
         req.body.gameConsole;
+
+    console.log(url);
+
     axios.get(url).then((response) => {
         res.json(response.data);
     });
@@ -60,6 +63,7 @@ exports.logout = function(req, res) {
         res.redirect("/");
     });
 };
+
 exports.searchgame = (req, res) => {
     const query = {};
     if (req.query.user_id) {
