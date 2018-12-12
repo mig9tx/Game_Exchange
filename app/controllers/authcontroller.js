@@ -12,10 +12,10 @@ exports.signin = function(req, res) {
 };
 
 exports.dashboard = function(req, res) {
-    const query = {};
-    if (req.query.user_id) {
-        query.UserId = req.query.user_id;
-    }
+    // const query = {};
+    // if (req.query.user_id) {
+    //     query.UserId = req.query.user_id;
+    // }
     //Here we add an "include" property to our option in our findAll query
     //We set the value to an array of the models we want to include in a left outer join
     //In this case, just db.User
@@ -27,7 +27,7 @@ exports.dashboard = function(req, res) {
     }).then(function(dbGame) {
         // console.log(dbGame);
         // console.log(req.user);
-        console.log(dbGame);
+        // console.log(dbGame);
         res.render("dashboard", {
             dbGames: dbGame,
             user: req.user
@@ -84,27 +84,62 @@ exports.logout = function(req, res) {
 };
 
 exports.searchgame = (req, res) => {
-    const query = {};
-    if (req.query.user_id) {
-        query.UserId = req.query.user_id;
-    }
-    //Here we add an "include" property to our option in our findAll query
-    //We set the value to an array of the models we want to include in a left outer join
-    //In this case, just db.User
-    db.Game.findAll({
-        where: {
+
+    let query = {};
+    //nothing in search fields
+    if(!(req.body.gameConsole) && !(req.body.gameTitle)){
+        query = {
             UserId: {
                 $notIn: [req.user.id]
             }
+        };
+    }
+    //title entered, all consoles
+    else if(!(req.body.gameConsole)){
+        query = {
+            UserId: {
+                $notIn: [req.user.id]
+            },
+            title: {
+                $like: '%'+req.body.gameTitle+'%'
+            }
+        };
+    }
+    //title entered, console selected
+    else{
+        query = {
+            UserId: {
+                $notIn: [req.user.id]
+            },
+            title: {
+                $like: '%'+req.body.gameTitle+'%'
+            },
+            console: req.body.gameConsole
         }
-        // include: [db.User]
+    }
+    console.log("queeeeeeeeeery");
+    console.log(query);
+    
+
+    db.Game.findAll({
+        where: query,
+        include: [db.User]
     }).then(function(dbGame) {
+
+        // console.log("dbgameeeeeeeeeee");
         // console.log(dbGame);
-        // console.log(req.user);
-        console.log(dbGame);
-        res.render("searchgame", {
-            dbGames: dbGame,
-            user: req.user
-        }); //JSON.stringify
+    
+        db.Game.aggregate('console', 'DISTINCT', { plain: false })
+        .then(function(dbConsole){
+
+            // console.log("dbConsole");
+            // console.log(dbConsole);
+            
+            res.render("searchgame", {
+                dbGames: dbGame,
+                currentUser: req.user,
+                allconsoles: dbConsole
+            });
+        });
     });
 };
