@@ -85,27 +85,73 @@
     <div id="user-games">
 		
 		<table id="games">
-		<tr>
+		{{!-- <tr>
 			<td>Game Title</td>
 			<td>Game System</td>
 			<td>Game Stop Trade</td>
 			<td>Game Stop Sell</td>
 			<td>Suggest Seller Price</td>
 
-		</tr>
+		</tr> --}}
         
 		{{#each dbGames}}
-		<tr>
-        <td><img src={{image}}></td>
-		<td>{{title}}</td>
-		<td>{{console}}</td>
-		<td>{{gsPriceBuy}}</td>
-		<td>{{gsPriceSell}}</td>
-		<td>{{userSellPrice}}
-        <button email={{user.email}}>Email Seller</button></td>
-        
-		</tr>
+           <div class="containeroverlay">
+                <img style="width:60%; height:60%;" src={{image}} class="imageoverlay">
+                <div class="overlay">
+                    <div class="text">
+                        <h2 class=""> Title: {{title}}</h2> <br>
+                        <p>System: {{console}}</p><br>
+                        <p>GameStop Price Buy: {{gsPriceBuy}}</p><br>
+                        <p>GameStop Price Sell: {{gsPriceSell}}</p><br>
+                        <p>User Sell Price: {{userSellPrice}}</p><br>
+                        <button email={{user.email}}>Email Seller</button></td>
+                    </div>
+                </div>
+            </div>
 		{{/each}}
-		</table>
+		</div>
     </div>
+
+    <style>
+        .containeroverlay {
+            position: relative;
+            width: 50%;
+        }
+
+        .imageoverlay {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 60%;
+            opacity: 0;
+            transition: .5s ease;
+            background-color: rgba(2, 2, 2, 0.831);
+        }
+
+        .containeroverlay:hover .overlay {
+            opacity: 1;
+        }
+
+        .text {
+            color: white;
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        
+    </style>
 </body>
