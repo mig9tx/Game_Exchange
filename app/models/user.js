@@ -29,5 +29,13 @@ module.exports = function(sequelize, Sequelize) {
         }
     });
 
+    User.associate = function(models) {
+        //associate Author with Games
+        //When author is deleted, also delete their games
+        User.hasMany(models.Game, {
+            onDelete: "cascade"
+        });
+    };
+
     return User;
 };

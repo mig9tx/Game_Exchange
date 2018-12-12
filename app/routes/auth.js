@@ -10,6 +10,7 @@ module.exports = function(app, passport) {
             failureRedirect: "/signup"
         })
     );
+    app.get("/searchgame", isLoggedIn, authController.searchgame);
     app.get("/dashboard", isLoggedIn, authController.dashboard);
     app.get("/logout", authController.logout);
     app.post(
@@ -19,6 +20,7 @@ module.exports = function(app, passport) {
             failureRedirect: "/signin"
         })
     );
+    app.post("/postData", authController.postGame);
 
     function isLoggedIn(req, res, next) {
         if (req.isAuthenticated()) {

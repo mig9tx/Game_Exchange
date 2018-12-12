@@ -1,12 +1,216 @@
 <body>
-    <form class="create-form">
-        <div class="form-group">
-            <label for="title">Game Name:</label>
-            <input type="text" id="title" name="title">
-            <label for="console">Game Console:</label>
-            <input type="text" id="console" name="console">
-            <button type="submit">Search</button>
+    <!-- header ================================================== -->
+    <header id="main-header">
+        <div class="row">
+
+            <!-- navbar ================================================== -->
+            <nav id="nav-wrap">
+
+                <a class="mobile-btn" href="#nav-wrap" title="Show navigation">
+                    <span class="menu-icon">Menu</span>
+                </a>
+                <a class="mobile-btn" href="#" title="Hide navigation">
+                    <span class="menu-icon">Menu</span>
+                </a>
+
+                <ul id="nav" class="nav">
+                    <li><a class="smoothscroll" href="/signup">Signup.</a></li>
+                    <li class="current"><a class="smoothscroll" href="/signin">Signin.</a></li>
+                    <li><a class="smoothscroll" href="/dashboard">Dashboard.</a></li>
+                    <li><a class="smoothscroll" href="/searchgame">Searchgame.</a></li>
+                    <li><a class="smoothscroll" href="/postGame">Postgame.</a></li>
+                    <li><a class="smoothscroll" href="/logout">Logout.</a></li>
+                </ul> <!-- end #nav -->
+
+            </nav> <!-- end #nav-wrap -->
+
         </div>
 
-    </form>
+    </header> <!-- end header -->
+
+
+    <!-- postGame Homepage hero
+   ================================================== -->
+    <section id="hero">
+
+        <div class="row hero-content">
+
+            <div class="twelve columns hero-container">
+
+                <!-- hero-slider start-->
+                <div id="hero-slider" class="flexslider p-5 h-100 position-relative z-index-2 overflow-auto  py-3 animated flip">
+
+                    <ul class="">
+
+                        <!-- slide -->
+                        <li>
+                            <div class="flex-caption">
+                                <h1 class="titleone">Hello <span class="gametitle">{{user.firstname}},</span> Post Games Here.
+                                </h1>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- postGame Picture -->
+                    <aside id="fh5co-hero" class="js-fullheight video">
+                        <div> <img src="https://images-eds-ssl.xboxlive.com/image?url=8Oaj9Ryq1G1_p3lLnXlsaZgGzAie6Mnu24_PawYuDYIoH77pJ.X5Z.MqQPibUVTcK_gPjzG5w4baW6ZxZj7nSNBN2cXpgreRaLIiMBc_..ohn3067B43HFe1SkdFcXoMuKjp5N40cCO3bCweNLe2Paj3GFt_nXWySB3WbxGZCJVxdCfyIx7xwa7wTtERKsNyZKzXD2xOEPhqeoFZBuOcKO_8ecPInvX_k1OfGRnzTNM-&h=1080&w=1920&format=jpg"
+                                class=""></div>
+                        {{!-- End Picture --}}
+
+                </div> <!-- end twelve columns-->
+            </div> <!-- end row -->
+    </section> <!-- end homepage hero -->
+
+
+    <!-- Results Section
+   ================================================== -->
+
+    <div id="hero-slider" class="flexslider">
+
+        <ul class="">
+
+            <!-- slide -->
+            <li>
+                <div class="flex-caption">
+                    <h1 class="titleone">Your Game Search <span class="gametitle">Results</span> .
+                    </h1>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+    {{!-- <div> <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-game-controller-b-512.png" class="controller-icon"
+            style="width:5%; height:5%; position:absolute; top:120%; Left:20%;"></div>
+    --}}
+    <div id="games">
+        {{!-- <h2>Game Search Results</h2> --}}
+        <br>
+        <table id="gameResults">
+            <th>Game Name</th>
+            <th>Console</th>
+            <th>GameStop Buy Price</th>
+            <th>GameStop Sell Price</th>
+        </table>
+    </div>
+    </div>
+
+    <div class="row items">
+        {{user}}
+        {{gameData.gameTitle}}
+
+
+        {{!-- search bar--}}
+
+        <div id="switch" class="containerr">
+            <section class="flexbox">
+                <div class="responsive">
+                    <form id="game-find">
+                        {{!-- <label for="title">Game Name:</label> --}}
+                        <input type="text" id="title" name="title" placeholder="Game Name...">
+                        {{!-- <label for="console">Game Console:</label> --}}
+                        <input type="text" id="gameConsole" name="gameConsole" placeholder="Game System...">
+                        <button id="submit-button" type="submit">Search</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+        </section>
+
+
+        <script>
+
+            let gameTitle = "";
+            let gameConsole = "";
+            let resultData = {};
+
+            function addGametoDB(element) {
+                let value = element.value;
+                console.log(value);
+                let j = value;
+                console.log(j);
+                console.log(resultData);
+                let title = resultData[j]["product-name"];
+                let system = resultData[j]["console-name"];
+                let gsPriceBuy = (Number.parseFloat(resultData[j]["gamestop-trade-price"]) / 100).toFixed(2);
+                let gsPriceSell = (Number.parseFloat(resultData[j]["gamestop-price"]) / 100).toFixed(2);
+                let userSellPrice = (Number.parseFloat(0.85 * gsPriceSell).toFixed(2));
+
+                console.log('----------- In add Game to dB-----------------------')
+                console.log(title);
+                console.log(system);
+                console.log(gsPriceBuy);
+                console.log(gsPriceSell);
+                console.log(userSellPrice);
+
+                let game = {
+                    title: title,
+                    console: system,
+                    image: "no Image url yet",
+                    gsPriceBuy: gsPriceBuy,
+                    gsPriceSell: gsPriceSell,
+                    userSellPrice: userSellPrice,
+                };
+                console.log("this is the game" + game);
+                $.ajax({
+                    type: "POST",
+                    data: JSON.stringify(game),
+                    url: "api/games",
+                    contentType: "application/json"
+                });
+                $("#gameResults").empty();
+            }
+
+            $("#game-find").submit(function (event) {
+                event.preventDefault();
+                gameTitle = $("#title").val();
+                gameConsole = $("#gameConsole").val();
+
+
+                $.ajax({
+                    url: "/postData",
+                    method: "POST",
+                    data: {
+                        gameTitle: gameTitle,
+                        gameConsole: gameConsole
+                    }
+                }).then(function (data) {
+                    resultData = data.products;
+                    console.log(resultData);
+                    console.log(data);
+                    console.log(data.products);
+                    console.log(data.products[0]["product-name"]);
+                    console.log(data.products[0]["console-name"]);
+                    console.log(data.products[0]["gamestop-trade-price"]);
+                    console.log(data.products[0]["gamestop-price"]);
+                    $("#gameResults").append("<h3>Select Your Game</h3>");
+                    for (let i = 0; i < data.products.length && i <= 6; i++) {
+                        let row = $("<tr id='game'>");
+                        let gameTitle = data.products[i]["product-name"];
+                        let gameConsole = data.products[i]["console-name"];
+                        let gsPriceBuy = (Number.parseFloat(data.products[i]["gamestop-trade-price"]) / 100).toFixed(2);
+                        let gsPriceSell = (Number.parseFloat(data.products[i]["gamestop-price"]) / 100).toFixed(2);
+                        row.attr('index', i);
+                        row.append("<td>" + gameTitle + "</td>");
+                        row.append("<td>" + gameConsole + "</td>");
+                        row.append("<td>" + gsPriceBuy + "</td>");
+                        row.append("<td>" + gsPriceSell + "</td>");
+                        let button = $("<button id='button" + i + "' onclick='addGametoDB(this)' value='" + i + "'>SELECT</button>");
+                        row.append(button);
+                        $("#gameResults").append(row);
+                    }
+
+                });
+
+                //     function getGameImage(){
+                //         $.ajax({ 
+                //       url: "https://www.pricecharting.com/api/products?" + PRICE_KEY + "&q=" + gameTitle + " " + gameConsole, 
+                //       method: "GET" 
+                //     }).then(function(results) {
+                //     });
+            });
+        </script>
+    </div>
+    </div>
+    </div>
 </body>
