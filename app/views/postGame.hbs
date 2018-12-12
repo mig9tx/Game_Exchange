@@ -124,42 +124,51 @@
             let gameConsole = "";
             let resultData = {};
 
-            function addGametoDB(element) {
-                let value = element.value;
-                console.log(value);
-                let j = value;
-                console.log(j);
-                console.log(resultData);
-                let title = resultData[j]["product-name"];
-                let system = resultData[j]["console-name"];
-                let gsPriceBuy = (Number.parseFloat(resultData[j]["gamestop-trade-price"]) / 100).toFixed(2);
-                let gsPriceSell = (Number.parseFloat(resultData[j]["gamestop-price"]) / 100).toFixed(2);
-                let userSellPrice = (Number.parseFloat(0.85 * gsPriceSell).toFixed(2));
+           function addGametoDB(element) {
+                    let value = element.value;
+                    console.log(value);
+                    let j = value;
+                    console.log(j);
+                    console.log(resultData);
+                    let title = resultData[j]["product-name"];
+                    let system = resultData[j]["console-name"];
+                    let gsPriceBuy = (Number.parseFloat(resultData[j]["gamestop-trade-price"]) / 100).toFixed(2);
+                    let gsPriceSell = (Number.parseFloat(resultData[j]["gamestop-price"]) / 100).toFixed(2);
+                    let userSellPrice = (Number.parseFloat(0.85 * gsPriceSell).toFixed(2));
 
-                console.log('----------- In add Game to dB-----------------------')
-                console.log(title);
-                console.log(system);
-                console.log(gsPriceBuy);
-                console.log(gsPriceSell);
-                console.log(userSellPrice);
+                    console.log('----------- In add Game to dB-----------------------')
+                    console.log(title);
+                    console.log(system);
+                    console.log(gsPriceBuy);
+                    console.log(gsPriceSell);
+                    console.log(userSellPrice);
 
-                let game = {
-                    title: title,
-                    console: system,
-                    image: "no Image url yet",
-                    gsPriceBuy: gsPriceBuy,
-                    gsPriceSell: gsPriceSell,
-                    userSellPrice: userSellPrice,
-                };
-                console.log("this is the game" + game);
-                $.ajax({
-                    type: "POST",
-                    data: JSON.stringify(game),
-                    url: "api/games",
-                    contentType: "application/json"
-                });
-                $("#gameResults").empty();
-            }
+                    $.ajax({
+                        url: "/getImg",
+                        method: "POST",
+                        data: { gameTitle: title }
+                    }).then(function (data) {
+
+                        let imgThumb = data[0].cover.url;
+
+                        let game = {                            
+                            title: title,
+                            console: system,
+                            image: imgThumb.replace("thumb", "1080p"),
+                            gsPriceBuy: gsPriceBuy,
+                            gsPriceSell: gsPriceSell,
+                            userSellPrice: userSellPrice,
+                        };
+
+                        $.ajax({
+                            type: "POST",
+                            data: JSON.stringify(game),
+                            url: "api/games",
+                            contentType: "application/json"
+                        });
+                        $("#gameResults").empty();
+                    });
+                }
 
             $("#game-find").submit(function (event) {
                 event.preventDefault();

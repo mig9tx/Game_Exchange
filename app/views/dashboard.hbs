@@ -2,13 +2,14 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Page Title</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
+
 <body>
     <!-- header ================================================== -->
     <header id="main-header">
@@ -57,7 +58,8 @@
                         <!-- slide -->
                         <li>
                             <div class="flex-caption">
-                                <h1 class="titleone p-5 h-100 position-relative z-index-2 overflow-auto  py-3 animated bounceInLeft">Game On <span class="gametitle">{{user.firstname}}!</span> You are Logged In.
+                                <h1 class="titleone p-5 h-100 position-relative z-index-2 overflow-auto  py-3 animated bounceInLeft">Game
+                                    On <span class="gametitle">{{user.firstname}}!</span> You are Logged In.
                                 </h1>
                             </div>
                         </li>
@@ -66,7 +68,7 @@
                     <!-- postGame Picture -->
                     <aside id="fh5co-hero" class="js-fullheight video">
                         <div> <img src="https://www.pcgamesn.com/wp-content/uploads/2018/08/Fallout-76-system-requirements-900x507.png"
-                                style="height:100%; width:100%;" class ="p-5 h-100 position-relative z-index-2 overflow-auto  py-3 animated flipInX"></div>
+                                style="height:100%; width:100%;" class="p-5 h-100 position-relative z-index-2 overflow-auto  py-3 animated flipInX"></div>
                         {{!-- End Picture --}}
 
                 </div> <!-- end twelve columns-->
@@ -91,56 +93,102 @@
         </ul>
     </div>
 
+    {{!-- Dashboard --}}
 
 
-  {{!-- Dashboard --}}
-  
-  <div id="games">
-  </div>
-
-
-  <div id="user-games">
-    {{title}}
-    {{gsPriceSell}}
-  </div>
-
-    <div id="user-games">
-		
-		<table id="user-games">
-		<tr>
-			<td>Game Title</td>
-			<td>Game System</td>
-			<td>Game Stop Trade</td>
-			<td>Game Stop Sell</td>
-			<td>Suggest Seller Price</td>
-
-		</tr>
-		{{#each dbGames}}
-		<tr>
-		<td>{{title}}</td>
-		<td>{{console}}</td>
-		<td>{{gsPriceBuy}}</td>
-		<td>{{gsPriceSell}}</td>
-		<td>{{userSellPrice}}</td>
-		</tr>
-		{{/each}}
-		</table>
+    <div id="games">
     </div>
 
-  </div>
+    <div id="user-games">
+        {{title}}
+        {{gsPriceSell}}
+    </div>
 
-  <script>
+    <div id="user-games">
 
-    let queryURL = "/api/games";
-    console.log(queryURL);
-    $.ajax({
-      url: queryURL,
-      method: "GET"
-    }).then(function (data) {
-      console.log(data);
-    });
+        <table id="user-games">
+            {{!-- <tr>
+                <td>image</td>
+                <td>Game Title</td>
+                <td>Game System</td>
+                <td>Game Stop Trade</td>
+                <td>Game Stop Sell</td>
+                <td>Suggest Seller Price</td>
 
-  </script>
+            </tr> --}}
+            {{#each dbGames}}
+            <div class="containeroverlay">
+                <img style="width:60%; height:60%;" src={{image}} class="imageoverlay">
+                <div class="overlay">
+                    <div class="text">
+                        <h2 class=""> Title: {{title}}</h2> <br>
+                        <p>System: {{console}}</p><br>
+                        <p>GameStop Price Buy: {{gsPriceBuy}}</p><br>
+                        <p>GameStop Price Sell: {{gsPriceSell}}</p><br>
+                        <p>User Sell Price: {{userSellPrice}}</p>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+
+    </div>
+
+
+    <style>
+        .containeroverlay {
+            position: relative;
+            width: 50%;
+        }
+
+        .imageoverlay {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 60%;
+            opacity: 0;
+            transition: .5s ease;
+            background-color: rgba(2, 2, 2, 0.831);
+        }
+
+        .containeroverlay:hover .overlay {
+            opacity: 1;
+        }
+
+        .text {
+            color: white;
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        
+    </style>
+
+    <script>
+
+        let queryURL = "/api/games";
+        console.log(queryURL);
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (data) {
+            console.log(data);
+        });
+
+    </script>
 
 </body>
 
