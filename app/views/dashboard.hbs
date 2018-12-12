@@ -1,52 +1,108 @@
 <!doctype <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-  <header id="main-header">
+    <!-- header ================================================== -->
+    <header id="main-header">
+        <div class="row">
 
-		<div class="row">
+            <!-- navbar ================================================== -->
+            <nav id="nav-wrap">
 
-			<!-- <div class="logo">
-                <a href="index.html">Game-Exchange</a>
-            </div> -->
+                <a class="mobile-btn" href="#nav-wrap" title="Show navigation">
+                    <span class="menu-icon">Menu</span>
+                </a>
+                <a class="mobile-btn" href="#" title="Hide navigation">
+                    <span class="menu-icon">Menu</span>
+                </a>
 
-			<nav id="nav-wrap">
-
-				<a class="mobile-btn" href="#nav-wrap" title="Show navigation">
-					<span class="menu-icon">Menu</span>
-				</a>
-				<a class="mobile-btn" href="#" title="Hide navigation">
-					<span class="menu-icon">Menu</span>
-				</a>
-
-				 <ul id="nav" class="nav">
+                <ul id="nav" class="nav">
                     <li><a class="smoothscroll" href="/signup">Signup.</a></li>
                     <li class="current"><a class="smoothscroll" href="/signin">Signin.</a></li>
                     <li><a class="smoothscroll" href="/dashboard">Dashboard.</a></li>
+                    <li><a class="smoothscroll" href="/searchgame">Searchgame.</a></li>
                     <li><a class="smoothscroll" href="/postGame">Postgame.</a></li>
                     <li><a class="smoothscroll" href="/logout">Logout.</a></li>
-                    <!-- <li><a class="smoothscroll" href="#contact">Contact.</a></li> -->
                 </ul> <!-- end #nav -->
-			</nav> <!-- end #nav-wrap -->
 
-		</div>
+            </nav> <!-- end #nav-wrap -->
 
-	</header> <!-- end header -->
+        </div>
 
-    <h2>Dashboard</h2>
+    </header> <!-- end header -->
 
-    <h5>Game On {{user.firstname}}! You are Logged In.</h5>
-<div id="games">
 
-</div>
+    <!-- postGame Homepage hero
+   ================================================== -->
+    <section id="hero">
 
+        <div class="row hero-content">
+
+            <div class="twelve columns hero-container">
+
+                <!-- hero-slider start-->
+
+                <div id="hero-slider" class="">
+
+                    <ul class="">
+
+                        <!-- slide -->
+                        <li>
+                            <div class="flex-caption">
+                                <h1 class="titleone p-5 h-100 position-relative z-index-2 overflow-auto  py-3 animated bounceInLeft">Game On <span class="gametitle">{{user.firstname}}!</span> You are Logged In.
+                                </h1>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- postGame Picture -->
+                    <aside id="fh5co-hero" class="js-fullheight video">
+                        <div> <img src="https://www.pcgamesn.com/wp-content/uploads/2018/08/Fallout-76-system-requirements-900x507.png"
+                                style="height:100%; width:100%;" class ="p-5 h-100 position-relative z-index-2 overflow-auto  py-3 animated flipInX"></div>
+                        {{!-- End Picture --}}
+
+                </div> <!-- end twelve columns-->
+            </div> <!-- end row -->
+    </section> <!-- end homepage hero -->
+
+
+    <!-- Results Section
+   ================================================== -->
+
+    <div id="hero-slider" class="flexslider">
+
+        <ul class="">
+
+            <!-- slide -->
+            <li>
+                <div class="flex-caption">
+                    <h1 class="titleone">Dashboard <span class="gametitle">Results</span> .
+                    </h1>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+
+  {{!-- Dashboard --}}
+  
+  <div id="games">
+  </div>
+
+
+  <div id="user-games">
+    {{title}}
+    {{gsPriceSell}}
+  </div>
 
     <div id="user-games">
 		
@@ -72,29 +128,21 @@
 		</table>
     </div>
 
-    <div id="games from other users">
+  </div>
 
-    </div>
-    
-<script>
-    
-	  let queryURL = "/api/games";
+  <script>
+
+    let queryURL = "/api/games";
     console.log(queryURL);
-    $.ajax({ 
-      url: queryURL, 
-      method: "GET" 
-    }).then(function(data) {
-		console.log(data);
-	});
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function (data) {
+      console.log(data);
+    });
 
   </script>
 
-
-
-   
 </body>
+
 </html>
-    
-
-
-
