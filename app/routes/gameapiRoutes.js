@@ -40,15 +40,16 @@ module.exports = function(app) {
 
     //POST route for saving a new game
     app.post("/api/games", function(req, res) {
-        console.log(req.body);
-        console.log(req.user.id);
-        console.log(req.User);
+        // console.log(req.body);
+        // console.log(req.user.id);
+        // console.log(req.User);
         const game = req.body;
         // eslint-disable-next-line dot-notation
         game["UserId"] = req.user.id;
-        db.Game.create(game).then(function(dbGame) {
-            res.json(dbGame);
-        });
+        db.Game.create(game);
+        // .then(function(dbGame){
+        //     res.json(dbGame);
+        // });
     });
 
     //DELETE route for deleting games
@@ -57,19 +58,20 @@ module.exports = function(app) {
             where: {
                 id: req.params.id
             }
-        }).then(function(dbGame) {
-            res.json(dbGame);
         });
+        // .then(function(dbGame) {
+        //     res.json(dbGame);
+        // });
     });
 
-    //PUT route for updating games
+    // PUT route for updating games
     app.put("/api/games", function(req, res) {
         db.Game.update(req.body, {
             where: {
                 id: req.body.id
             }
         }).then(function(dbGame) {
-            res.json(dbGame);
+           res.json(dbGame);
         });
     });
 };

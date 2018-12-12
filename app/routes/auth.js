@@ -11,6 +11,8 @@ module.exports = function(app, passport) {
         })
     );
     app.get("/searchgame", isLoggedIn, authController.searchgame);
+    app.post("/searchgame", authController.searchgame);
+
     app.get("/dashboard", isLoggedIn, authController.dashboard);
     app.get("/logout", authController.logout);
     app.post(
@@ -22,7 +24,6 @@ module.exports = function(app, passport) {
     );
     app.post("/postData", authController.postGame);
     app.post("/getImg", authController.getImg);
-
 
     function isLoggedIn(req, res, next) {
         if (req.isAuthenticated()) {

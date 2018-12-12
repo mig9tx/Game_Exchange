@@ -15,9 +15,9 @@
 
                 <ul id="nav" class="nav">
                     <li><a class="smoothscroll" href="/signup">Signup.</a></li>
-                    <li class="current"><a class="smoothscroll" href="/signin">Signin.</a></li>
+                    <li><a class="smoothscroll" href="/signin">Signin.</a></li>
                     <li><a class="smoothscroll" href="/dashboard">Dashboard.</a></li>
-                    <li><a class="smoothscroll" href="/searchgame">Searchgame.</a></li>
+                    <li class="current"><a class="smoothscroll" href="/searchgame">Searchgame.</a></li>
                     <li><a class="smoothscroll" href="/postGame">Postgame.</a></li>
                     <li><a class="smoothscroll" href="/logout">Logout.</a></li>
                 </ul> <!-- end #nav -->
@@ -44,10 +44,8 @@
 
                         <!-- slide -->
                         <li>
-                            <div class="flex-caption p-5 h-100 position-relative z-index-2 overflow-auto  py-3 animated fadeInUp">
-								
-                                <h1 class="titleone">Hey<span class="gametitle"> {{user.firstname}},</span> Search Games Here.
-                                </h1>
+                            <div class="flex-caption p-5 h-100 position-relative z-index-2 overflow-auto  py-3 animated fadeInUp">								
+                                <h1 class="titleone">Hey<span class="gametitle"> {{currentUser.firstname}},</span> Search Games Here.</h1>
                             </div>
                         </li>
                     </ul>
@@ -57,12 +55,63 @@
                         <div> <img src="https://www.callofduty.com/content/dam/atvi/callofduty/wwii/home/sh-overview.jpg"
                                 style="height:100%; width:100%;" class="p-5 h-100 position-relative z-index-2 overflow-auto  py-3 animated bounceInUp"></div>
                         {{!-- End Picture --}}
-
-                </div> <!-- end twelve columns-->
-            </div> <!-- end row -->
+                    </aside>
+                </div>
+            </div> <!-- end twelve columns-->
+        </div> <!-- end row -->
     </section> <!-- end homepage hero -->
     
 
+    {{!-- SEARCH THE DATABASE FOR GAMES --}}
+    <div class="row items">
+        {{!-- search bar--}}
+
+        <div id="switch" class="containerr">
+            <section class="flexbox">
+                <div class="responsive">
+                    <form id="gamedb-find">
+                        {{!-- <label for="title">Game Name:</label> --}}
+                        <input type="text" id="title" name="title" placeholder="Game Name...  (use keywords)">
+
+                        {{!-- DROPDOWN  value={{DISTINCT}}--}}
+                        <select id="consoleDrop">
+                            <option value="">All Systems</option>
+                            
+                            {{#each allconsoles}}
+                            <option>{{DISTINCT}}</option>
+                            {{/each}}
+
+                        </select>
+                        <button id="submit-button" type="submit">Search</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+    
+    $("#gamedb-find").submit(function(event){
+        event.preventDefault();
+        let gameTitle = $(this).children("#title").val().trim();
+        let gameConsole = $(this).children("#consoleDrop").val();
+        //console.log(gameTitle);
+        //console.log(gameConsole);
+
+        $.ajax({
+            url: "/searchgame",
+            method: "POST",
+            data: { 
+                gameTitle: gameTitle,
+                gameConsole: gameConsole
+            }
+        }).then(function (data) {
+            console.log("searched!!!!!!!");
+        });
+
+    });
+
+    </script>
 
     <!-- Results Section
    ================================================== -->
@@ -74,8 +123,7 @@
             <!-- slide -->
             <li>
                 <div class="flex-caption">
-                    <h1 class="titleone">Your Game Search <span class="gametitle">Results</span> .
-                    </h1>
+                    <h1 class="titleone">Your Game Search <span class="gametitle">Results</span></h1>
                 </div>
             </li>
         </ul>
@@ -83,33 +131,23 @@
 
 
     <div id="user-games">
-		
-		<table id="games">
-		{{!-- <tr>
-			<td>Game Title</td>
-			<td>Game System</td>
-			<td>Game Stop Trade</td>
-			<td>Game Stop Sell</td>
-			<td>Suggest Seller Price</td>
-
-		</tr> --}}
-        
+		        
 		{{#each dbGames}}
            <div class="containeroverlay">
                 <img style="width:60%; height:60%;" src={{image}} class="imageoverlay">
                 <div class="overlay">
                     <div class="text">
-                        <h2 class=""> Title: {{title}}</h2> <br>
+                        <h2 class="">{{title}}</h2> <br>
                         <p>System: {{console}}</p><br>
+                        <p>Seller: {{User.firstname}} {{User.lastname}}</p><br>
                         <p>GameStop Price Buy: {{gsPriceBuy}}</p><br>
                         <p>GameStop Price Sell: {{gsPriceSell}}</p><br>
                         <p>User Sell Price: {{userSellPrice}}</p><br>
-                        <button email={{user.email}}>Email Seller</button></td>
+                        <button>Email Seller</button>
                     </div>
                 </div>
             </div>
 		{{/each}}
-		</div>
     </div>
 
     <style>
@@ -154,4 +192,7 @@
         }
         
     </style>
+
+
+
 </body>

@@ -1,14 +1,3 @@
-<!doctype <!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-</head>
 
 <body>
     <!-- header ================================================== -->
@@ -27,8 +16,8 @@
 
                 <ul id="nav" class="nav">
                     <li><a class="smoothscroll" href="/signup">Signup.</a></li>
-                    <li class="current"><a class="smoothscroll" href="/signin">Signin.</a></li>
-                    <li><a class="smoothscroll" href="/dashboard">Dashboard.</a></li>
+                    <li><a class="smoothscroll" href="/signin">Signin.</a></li>
+                    <li class="current"><a class="smoothscroll" href="/dashboard">Dashboard.</a></li>
                     <li><a class="smoothscroll" href="/searchgame">Searchgame.</a></li>
                     <li><a class="smoothscroll" href="/postGame">Postgame.</a></li>
                     <li><a class="smoothscroll" href="/logout">Logout.</a></li>
@@ -86,7 +75,7 @@
             <!-- slide -->
             <li>
                 <div class="flex-caption">
-                    <h1 class="titleone">Dashboard <span class="gametitle">Results</span> .
+                    <h1 class="titleone">Your <span class="gametitle">Games</span>
                     </h1>
                 </div>
             </li>
@@ -96,36 +85,29 @@
     {{!-- Dashboard --}}
 
 
-    <div id="games">
-    </div>
+    {{!-- <div id="games">
+    </div> --}}
 
-    <div id="user-games">
+    {{!-- <div id="user-games">
         {{title}}
         {{gsPriceSell}}
-    </div>
+    </div> --}}
 
     <div id="user-games">
 
-        <table id="user-games">
-            {{!-- <tr>
-                <td>image</td>
-                <td>Game Title</td>
-                <td>Game System</td>
-                <td>Game Stop Trade</td>
-                <td>Game Stop Sell</td>
-                <td>Suggest Seller Price</td>
+        {{!-- <table id="user-games"> --}}
 
-            </tr> --}}
             {{#each dbGames}}
             <div class="containeroverlay">
                 <img style="width:60%; height:60%;" src={{image}} class="imageoverlay">
                 <div class="overlay">
                     <div class="text">
-                        <h2 class=""> Title: {{title}}</h2> <br>
+                        <h2 class="">{{title}}</h2> <br>
                         <p>System: {{console}}</p><br>
                         <p>GameStop Price Buy: {{gsPriceBuy}}</p><br>
                         <p>GameStop Price Sell: {{gsPriceSell}}</p><br>
                         <p>User Sell Price: {{userSellPrice}}</p>
+                        <button class="delete-game" value={{id}}>Delete</button>
                     </div>
                 </div>
             </div>
@@ -177,19 +159,20 @@
         
     </style>
 
-    <script>
 
-        let queryURL = "/api/games";
-        console.log(queryURL);
+
+<script>
+
+    $(".delete-game").on("click", function(){
+        let thisID = this.value;
         $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).then(function (data) {
-            console.log(data);
+            method: "DELETE",
+            url: "/api/games/" + thisID
+        }).then(function(data){
+            location.reload();
         });
+    });
 
-    </script>
+</script>
 
 </body>
-
-</html>
