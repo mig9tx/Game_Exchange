@@ -1,14 +1,15 @@
 {
   "development": {
     "username": "root",
-    "password": "",
+    "password": "rootroot",
     "database": "sequelize_passport",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "insecureAuth": true
   },
   "test": {
     "username": "root",
-    "password": "root",
+    "password": "rootroot",
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
